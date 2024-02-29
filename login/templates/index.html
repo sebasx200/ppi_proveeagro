@@ -1,0 +1,30 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inicio de sesión</title>
+    <link rel="stylesheet" href="{% static 'mystyle.css' %}">
+</head>
+
+<body>
+    <h1 id="titulo1">Inicio de sesión</h1>
+    <h2 id="titulo2">Welcome to our PROVEEAGRO page</h2>
+    <p id="parrafo1">It is being developed in order to help
+        farmers to manage and organize the agendas of <br>their respective most important suppliers</p>
+    <div>
+        <form onsubmit="mostrarMensaje()">
+
+            <label for="fname">Usuario</label><br>
+            <input type="text" id="fname" name="fname" placeholder="Ingrese usuario"><br>
+            <label for="lname">Contraseña</label><br>
+            <input type="password" id="lname" name="lname" placeholder="Ingrese la contraseña"><br><br>
+            <input type="submit" value="Iniciar sesión">
+        </form>
+    </div>
+    <img src="logo_proveeagro.png" width="200">
+</body>
+
+</html>

@@ -1,0 +1,11 @@
+# files to ignore in the app
+
+*.pyc
+__pycache__/
+
+*.sqlite3
+*.pyc
+*.pyo
+*.pyc
+*.pyo
+*.env

@@ -1,0 +1,40 @@
+        #titulo1 {
+            color: white;
+            text-align: center;
+            background-color: #a1887f;
+            margin-left: 400px;
+            margin-right: 400px;
+            border-radius: 10px;
+            border-style: solid;
+            border-color: white;
+        }
+        #titulo2 {
+            color: white;
+            text-align: center;
+            
+        }
+        #parrafo1{
+            text-align: center;
+            color: white;
+            font-size: 25px;
+        }
+
+        body {
+            background-image: url("landscape.jpg");
+            background-position: center;
+            background-repeat: no-repeat;
+
+            background-attachment: fixed;
+        }
+
+        div {
+            width: 300px;
+            margin: auto;
+            margin-top: 80px;
+            text-align: center;
+            border-radius: 10px;
+            background-color: #a1887f;
+            color: white;
+            border-style: solid;
+            border-color: white;
+        }
