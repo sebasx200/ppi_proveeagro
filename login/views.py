@@ -6,7 +6,12 @@ from .forms import CreateNewUser
 
 # this function redirects to the index.html file for the main page
 def home(request):
-    return render(request, 'home.html')
+    menu_navbar = [
+        {'url': 'home', 'title': 'Home'},
+        {'url': 'login', 'title': 'Login'},
+        {'url': 'signup', 'title': 'Sign Up'}
+    ]
+    return render(request, 'home.html', {'menu_navbar': menu_navbar})
 
 # this function redirects to the login.html file for login
 def login(request):

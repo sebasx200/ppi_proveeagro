@@ -1,7 +1,17 @@
-         /*this will be the space for base.html styles*/ 
-         
-         #titulo1-login{
-            background-color: red;
-         }
-          /* ------------------------------------------*/ 
+   /*this will be the space for base.html styles*/ 
+   
+   #navbar{
+      background-color: #519de9;
+      border-bottom: 1px solid #e5e5e5;
+      padding: 10px 0;
+      margin-bottom: 20px;
+   }
+
+      /* ------------------------------------------*/ 
+
+      /*this will be the space for login.html styles*/ 
+      
+      #titulo1-login{
+      background-color: blue;
+   }
         
