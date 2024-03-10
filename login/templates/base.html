@@ -11,19 +11,25 @@
       crossorigin="anonymous"
     />
     <link rel="stylesheet" href="{% static 'styles.css' %}" />
-    <title>Proveeagro - Home</title>
-    <div id="navbar-container">
-    <nav id="navbar">
-      <label id="logo">Proveeagro</label>
-      <ul>
-        <li><a class ="active" href="{% url 'home' %}">Home</a></li>
-        <li><a class ="active" href="{% url 'login' %}">Login</a></li>
-        <li><a class ="active" href="{% url 'signup' %}">Signup</a></li>
-      </ul>
-    </nav>
-  </div>
-  </body>
+    <title>Proveeagro - Main</title>
   </head>
   <body>
-  <div id="content">{% block content %} {% endblock %}</div>
+    <div id="navbar-container">
+      <nav id="navbar">
+        <label id="logo">Proveeagro</label>
+        <ul>
+          <li><a class="active" href="/">Main</a></li>
+          <!--This if validates if the user has an active session to show the options logout and profile-->
+          {% if user.is_authenticated %}
+          <li><a class="active" href="/profile">Profile</a></li>
+          <li><a class="active" href="/logout">Logout</a></li>
+          {% else %}
+          <li><a class="active" href="/login">Login</a></li>
+          <li><a class="active" href="/signup">Signup</a></li>
+          {% endif %}
+        </ul>
+      </nav>
+    </div>
+    <div id="content">{% block content %} {% endblock %}</div>
+  </body>
 </html>

@@ -4,4 +4,16 @@
 <h1 id="titulo1-login">Login-Proveeagro</h1>
 <p>Please, input your login information</p>
 
+<div>
+    {{error}}
+    <form method="POST">
+
+        {% csrf_token %}
+        {{ form.as_p }}
+        
+        <button type="submit">Sign Up</button>
+    </form>
+    
+</div>
+
 {% endblock %}
