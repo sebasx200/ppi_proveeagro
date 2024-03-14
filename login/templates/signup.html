@@ -1,9 +1,14 @@
 {% extends 'base.html' %}
+{% load static %}
+
 {% block content %}
+
+<h5> Please input your information to signup in Proveeagro</h5>
+<br>
 <div>
     
-    
-    <form method="POST">
+    <form class="form-container" method="POST">
+        <img src="{% static 'img/logo_proveeagro.png' %}" alt="Proveeagro" width="250">
 
         {% csrf_token %}
         {{ form.as_p }}
@@ -13,4 +18,3 @@
     
 </div>
 {% endblock %}
-</html>

@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block content %}
 <h1 id="titulo1-login">Login-Proveeagro</h1>
@@ -6,14 +7,15 @@
 
 <div>
     {{error}}
-    <form method="POST">
+    <form class="form-container" method="POST">
+        <img src="{% static 'img/logo_proveeagro.png' %}" alt="Proveeagro" width="250"> 
 
         {% csrf_token %}
         {{ form.as_p }}
         
-        <button type="submit">Sign Up</button>
+        <button type="submit">Log in</button>
     </form>
     
 </div>
-
 {% endblock %}
+

@@ -10,7 +10,7 @@
       integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
       crossorigin="anonymous"
     />
-    <link rel="stylesheet" href="{% static 'styles.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}" />
     <title>Proveeagro - Main</title>
   </head>
   <body>
@@ -22,10 +22,10 @@
           <!--This if validates if the user has an active session to show the options logout and profile-->
           {% if user.is_authenticated %}
           <li><a class="active" href="/profile">Profile</a></li>
-          <li><a class="active" href="/logout">Logout</a></li>
+          <li><a class="active" href="/logout">Log out</a></li>
           {% else %}
-          <li><a class="active" href="/login">Login</a></li>
-          <li><a class="active" href="/signup">Signup</a></li>
+          <li><a class="active" href="/login">Log in</a></li>
+          <li><a class="active" href="/signup">Sign up</a></li>
           {% endif %}
         </ul>
       </nav>

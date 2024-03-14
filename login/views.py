@@ -1,7 +1,7 @@
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from .forms import CreateNewUser
-from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import authenticate, login, logout
 
 # Create your views here.
@@ -35,7 +35,7 @@ def signup(request):
     which is using the UserCreationForm from django
     """
     if request.method == 'POST':
-        form = UserCreationForm(request.POST)
+        form = CreateNewUser(request.POST)
         if form.is_valid():
             user = form.save()
             username = form.cleaned_data['username']
@@ -45,7 +45,7 @@ def signup(request):
                 login(request, user)
                 return redirect('home')
     else:
-        form = UserCreationForm()
+        form = CreateNewUser()
     return render(request, 'signup.html', {'form': form})
 
 def logout_sesion(request):
