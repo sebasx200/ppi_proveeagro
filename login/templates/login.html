@@ -5,17 +5,21 @@
 <h1 id="titulo1-login">Login-Proveeagro</h1>
 <p>Please, input your login information</p>
 
-<div>
+<main class="container">
     {{error}}
-    <form class="form-container" method="POST">
-        <img src="{% static 'img/logo_proveeagro.png' %}" alt="Proveeagro" width="250"> 
+    <form class="card card-body" method="POST">
 
         {% csrf_token %}
-        {{ form.as_p }}
-        
-        <button type="submit">Log in</button>
-    </form>
-    
-</div>
+        <div class="form-group">
+            <label for="username">Username</label>
+            <input type="text" class="form-control" required id="username" name="username" placeholder="Enter your username">
+        </div>
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" class="form-control" required id="password" name="password" placeholder="Enter your password">
+        </div>
+        <button type="submit" class="btn btn-primary">Log in</button>
+    </form> 
+</main>
 {% endblock %}
 
