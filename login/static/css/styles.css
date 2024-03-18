@@ -25,8 +25,9 @@ body{
 
 #forgot {
     min-width: 100px;
-    margin-left: auto;
-    text-decoration: none
+    margin-right: auto;
+    text-decoration: none;
+    float: right;
 }
 
 a:hover {
@@ -39,10 +40,9 @@ a:hover {
     cursor: pointer
 }
 
-.btn{
-    width: 200px;
-    margin-top: 20px;
-    border-radius: 15px
+.btn.btn-primary {
+    border-radius: 10px;
+    width: 100%;
 }
 
 .panel {
