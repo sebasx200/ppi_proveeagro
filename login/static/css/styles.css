@@ -14,10 +14,6 @@ body{
     background-repeat: no-repeat; /* Evita que la imagen se repita */
 }
 
-.content{
-    margin-top: 50px;
-}
-
 .panel-heading {
     text-align: center;
     margin-bottom: 10px
