@@ -1,8 +1,37 @@
 {% extends 'base.html' %}
 
-{% block content %}
+{% load static %}
 
-<h1 id="titulo1-main">Main-Proveeagro</h1>
-<p>Welcome to Proveeagro</p>
+{% block content %}
+<div class="row">
+    <div class="col-md-4">
+        <h3>Proveedores cercanos</h3>
+        <ol class="list-group">
+            <li class="list-group-item d-flex justify-content-between align-items-start">
+              <div class="ms-2 me-auto">
+                <div class="fw-bold">Subheading</div>
+                Content for list item
+              </div>
+             
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-start">
+              <div class="ms-2 me-auto">
+                <div class="fw-bold">Subheading</div>
+                Content for list item
+              </div>
+              
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-start">
+              <div class="ms-2 me-auto">
+                <div class="fw-bold">Subheading</div>
+                Content for list item
+              </div>
+            </li>
+          </ol>
+    </div>
+    <div class="col-md-8">
+        {{ map|safe }}
+    </div>
+</div>
 
 {% endblock %}
