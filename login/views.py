@@ -31,7 +31,8 @@ def login_page(request):
                               {'form': AuthenticationForm(), 'error': AuthenticationForm.error_messages['invalid_login']})
             else:
                 login(request, user)
-                return redirect('home')
+                if user.is_authenticated:
+                    return redirect('home')
 
 
 def signup(request):
@@ -41,32 +42,29 @@ def signup(request):
     """
     if request.method == 'GET':
         return render(request, 'signup.html', {'form': CreateNewUser()})
-    else:
-        if request.method == 'POST':
-            form = CreateNewUser(request.POST)
-            if form.is_valid():
-                user = form.save()
-                username = form.cleaned_data['username']
-                password = form.cleaned_data['password1']
-                user = authenticate(username=username, password=password)
-                if user is None:
-                    return render(request, 'login.html', 
-                              {'form': CreateNewUser(), 'error': CreateNewUser.error_messages['invalid_signup']})
-                else:
-                    login(request, user)
-                    return redirect('home')
+    if request.method == 'POST':
+        form = CreateNewUser(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('home')
+        else:
+            form = CreateNewUser()
+            return render(request, 'signup.html', {'form': form, 'error': 'The data you entered is not valid'})
                     
-
+@login_required
 def logout_sesion(request):
     """
     this function redirects to the main.html file when the user logs out
     """
     logout(request)
-    return render(request, 'main.html')
+    return redirect('main')
 
 @login_required
 def home(request):
     """
     this function redirects to the home.html file for the home page when the user logs in or signs up
     """
-    return render(request, 'home.html')
+    # the username is passed to the home.html file to be displayed
+    username = request.user.username if request.user.is_authenticated else None
+    
+    return render(request, 'home.html', {'username': username})

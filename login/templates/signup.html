@@ -16,36 +16,38 @@
                         {% csrf_token %}
                         <div class="form-group py-2">
                             <div class="input-field"> <span class="far fa-user p-2"></span> 
-                                <input type="text" id="username" name="username" placeholder="Enter your new username" required> </div>
+                                <input type="text" name="username" placeholder="Enter your new username" required> </div>
                         </div>
                         <div class="form-group py-1 pb-2">
                             <div class="input-field"> <span class="fas fa-lock px-2"></span>
-                                <input type="password" id="password1" name="password1" placeholder="Enter your new Password" required> 
+                                <input type="password" name="password1" placeholder="Enter your new Password" required> 
                                 <button class="btn bg-white text-muted"> <span class="far fa-eye-slash"></span> </button> 
                             </div>
                         </div>
                         <div class="form-group py-2">
                             <div class="input-field"> <span class="far fa-user p-2"></span> 
-                                <input type="password" id="password2" name="password2" placeholder="Confirm your password" required>
+                                <input type="password" name="password2" placeholder="Confirm your password" required>
                                 <button class="btn bg-white text-muted"> <span class="far fa-eye-slash"></span> </button>
                             </div>
                         </div>
                         <div class="form-group py-2">
                             <div class="input-field"> <span class="far fa-user p-2"></span>
-                                <input type="email" id="email" name="email" placeholder="Enter your email" required> 
+                                <input type="email" name="email" placeholder="Enter your email" required> 
                             </div>
                         </div>
                         <div class="form-group py-2">
                             <div class="input-field"> <span class="far fa-user p-2"></span>
-                                <input type="text" id="first_name" name="first_name" placeholder="Enter your name" required> 
+                                <input type="text" name="first_name" placeholder="Enter your name" required> 
                             </div>
                         </div>
                         <div class="form-group py-2">
                             <div class="input-field"> <span class="far fa-user p-2"></span>
-                                <input type="text" id="last_name" name="last_name" placeholder="Enter your last name" required> 
+                                <input type="text" name="last_name" placeholder="Enter your last name" required> 
                             </div>
                         </div>
-                        
+                        {% if error %}
+                            <div class="alert alert-danger">{{ error }}</div>
+                        {% endif %}  
                         <button class="btn btn-primary btn-block mt-3">Sign up</button>
                     </form>
                 </div>
