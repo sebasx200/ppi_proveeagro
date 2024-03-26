@@ -63,8 +63,10 @@ def signup(request):
                 return redirect('home')
             else:
                 return render(request, 'signup.html', {'form': form})
-    else: 
-        return render(request, 'signup.html', {'form': CreateNewUser()})
+    else:
+        form = CreateNewUser()
+    
+    return render(request, 'signup.html', {'form': form})
 
                     
 @login_required
