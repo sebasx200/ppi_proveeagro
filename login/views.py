@@ -4,6 +4,7 @@ from .forms import CreateNewUser
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
 import folium
 
 # Create your views here.
@@ -21,18 +22,26 @@ def login_page(request):
     """
     this function redirects to the login.html file for login and uses the AuthenticationForm from django
     """
-    if request.method == 'GET':
-        return render(request, 'login.html', {'form': AuthenticationForm()})
-    else: 
-        if request.method == 'POST':
-            user = authenticate(request, username=request.POST['username'], password=request.POST['password'])
-            if user is None:
-                return render(request, 'login.html', 
-                              {'form': AuthenticationForm(), 'error': AuthenticationForm.error_messages['invalid_login']})
+    if request.method == 'POST':
+        form = AuthenticationForm(data=request.POST)
+        if form.is_valid():
+            # get the user from the form
+            user = form.get_user()
+            # log in the user
+            login(request, user)
+            return redirect('home')
+        else:
+            username = request.POST['username']
+            password = request.POST['password']
+            # check if the user exists
+            if User.objects.filter(username=username).exists():
+                error = 'The password you entered is incorrect'
             else:
-                login(request, user)
-                if user.is_authenticated:
-                    return redirect('home')
+                error = 'The username you entered does not exist'
+
+            return render(request, 'login.html', {'form': form, 'error': error})
+    else:
+        return render(request, 'login.html', {'form': AuthenticationForm()})
 
 
 def signup(request):
@@ -40,16 +49,23 @@ def signup(request):
     this function redirects to the signup.html file for sign up
     which is using the UserCreationForm from django
     """
-    if request.method == 'GET':
-        return render(request, 'signup.html', {'form': CreateNewUser()})
     if request.method == 'POST':
         form = CreateNewUser(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('home')
-        else:
-            form = CreateNewUser()
-            return render(request, 'signup.html', {'form': form, 'error': 'The data you entered is not valid'})
+
+            username = form.cleaned_data['username']
+            password = form.cleaned_data['password1']
+            user = authenticate(username=username, password=password)
+
+            if user is not None:
+                login(request, user)
+                return redirect('home')
+            else:
+                return render(request, 'signup.html', {'form': form})
+    else: 
+        return render(request, 'signup.html', {'form': CreateNewUser()})
+
                     
 @login_required
 def logout_sesion(request):

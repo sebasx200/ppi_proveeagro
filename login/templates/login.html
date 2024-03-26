@@ -8,30 +8,81 @@
         <div class="offset-md-2 col-lg-5 col-md-7 offset-lg-4 offset-md-3">
             <div class="panel border bg-white">
                 <div class="panel-heading">
-                    <h3 class="pt-3 font-weight-bold">Login</h3>
+                    <h3 class="pt-3 font-weight-bold">Log in</h3>
                 </div>
                 <div class="panel-body p-3">
                     
                     <form method="POST">
+                        
                         {% csrf_token %}
-                        <div class="form-group py-2">
-                            <div class="input-field"> <span class="far fa-user p-2"></span> 
-                                <input type="text" id="username" name="username" placeholder="Enter your username" required> </div>
+
+                        <!-- Form inputs -->
+                        <div class="form-floating mb-2">
+                            <i class="bi bi-person-fill text-primary me-2"></i>
+                            <input type="text" class="form-control" id="username" name="username" placeholder="Your username" required>
+                            <label for="floatingInput" class="form-labels">Username</label>
                         </div>
-                        <div class="form-group py-1 pb-2">
-                            <div class="input-field"> <span class="fas fa-lock px-2"></span>
-                                <input type="password" id="password" name="password" placeholder="Enter your Password" required> 
-                                <button class="btn bg-white text-muted"> <span class="far fa-eye-slash"></span> </button> </div>
+
+                        <div class="form-floating mb-2">
+                            <i class="bi bi-lock-fill text-primary me-2"></i>
+                            <input type="password" class="form-control" id="password" name="password" placeholder="Password" required>
+                            <label for="floatingPassword" class="form-labels">Password</label>
+                            <button type="button" id="togglePasswordButton" class="btn bg-white text-muted position-absolute top-50 end-0 translate-middle-y me-2" onclick="togglePasswordVisibility('password')">
+                                <span id="passwordIcon" class="bi bi-eye-slash-fill"></span>
+                            </button>
                         </div>
+                        <!-- End of form inputs -->
+                      
+
                         <div class="form-inline"> 
                             <input type="checkbox" name="remember" id="remember"> 
                             <label for="remember" class="text-muted">Remember me</label>
-                            <a href="#" id="forgot" class="font-weight-bold">Forgot password?</a> </div>
-                            <button class="btn btn-primary btn-block mt-3">Log in</button>
+                            <a href="#" id="forgot" class="font-weight-bold">Forgot password?</a> 
+                        </div>
+                        <!-- Error message -->
+                        {% if error %}
+                            
+                            <div class="alert alert-danger mt-3" role="alert"> <span>{{ error }}</span> </div>
+                            
+                        {% endif %}
+                        <!-- End of error message -->
+
+                        <div class="container text-center mt-4 mb-2">
+                            <button class="btn btn-primary" type="submit">Log in</button>
+                        </div>
+
                         <div class="text-center pt-4 text-muted">Don't have an account? <a href="{% url 'signup' %}">Sign up</a> </div>
-                        <div class="text-center pt-4 text-muted"> <span>{{ error }}</span> </div>
-                        
+                        <p class="text-body-secondary mt-4 mb-2">© Proveeagro 2024</p>
+
                     </form>
+
+                    <!-- Script to keep the username value when the form is submitted and there are errors   -->
+                    {% if form.errors %}
+                        <script>
+                            document.getElementById("username").value = "{{ form.username.value }}";
+                        </script>
+                    {% endif %}
+                    <!-- End of script -->
+
+                    <!-- Script to toggle password visibility -->
+                    <script>
+                        function togglePasswordVisibility(inputId) {
+                            const passwordInput = document.getElementById(inputId);
+                            const passwordIcon = document.getElementById('passwordIcon');
+                            
+                            if (passwordInput.type === 'password') {
+                                passwordInput.type = 'text';
+                                passwordIcon.classList.remove('bi-eye-slash-fill');
+                                passwordIcon.classList.add('bi-eye-fill');
+                            } else {
+                                passwordInput.type = 'password';
+                                passwordIcon.classList.remove('bi-eye-fill');
+                                passwordIcon.classList.add('bi-eye-slash-fill');
+                            }
+                        }
+                    </script>
+                    <!--End of script-->
+
                 </div>
             </div>
         </div>

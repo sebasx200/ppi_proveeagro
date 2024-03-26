@@ -1,4 +1,4 @@
-/*login form*/
+/*login and signup form*/
 @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
 
 * {
@@ -33,7 +33,6 @@ a:hover {
 .form-inline label {
     padding-left: 10px;
     margin: 0;
-    cursor: pointer
 }
 
 .btn.btn-primary {
@@ -46,23 +45,26 @@ a:hover {
     border-radius: 12px
 }
 
-.input-field {
+.form-labels{
+    margin-left: 25px;
+}
+
+.form-floating {
     border-radius: 5px;
     padding: 5px;
     display: flex;
     align-items: center;
     cursor: pointer;
-    border: 1px solid #ddd;
-    color: #4343ff
+    
 }
 
 input[type='text'],
 input[type='password'],
 input[type='email'] {
-    border: none;
+    border: 1px solid #ddd;
     outline: none;
     box-shadow: none;
-    width: 100%
+    width: 100%;
 }
 
 .fa-eye-slash.btn {
@@ -116,4 +118,4 @@ a[target='_blank'] {
         left: 25%
     }
 }
-/*End of login form*/
+/*End of login and signup form*/
