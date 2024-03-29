@@ -6,17 +6,14 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 import folium
-
+from folium import plugins
 # Create your views here.
 
 def main(request):
     """
     this function redirects to the index.html file for the main page
     """
-    initial_map = folium.Map(location=[6.2121913,-75.5771953], zoom_start=15)
-    context = {'map': initial_map._repr_html_(), 'title': 'Medellin, Colombia'}
-
-    return render(request, 'main.html', context)
+    return render(request, 'main.html')
 
 def login_page(request):
     """
