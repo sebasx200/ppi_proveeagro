@@ -9,7 +9,7 @@
 }
 
 body{
-    background-image: url("../img/background.jpeg");
+    background-image: url("../img/background_1.png");
     background-size: cover; /* La imagen se ajustará para cubrir el área completa */
     background-repeat: no-repeat; /* Evita que la imagen se repita */
 }
@@ -24,6 +24,12 @@ body{
     margin-right: auto;
     text-decoration: none;
     float: right;
+}
+
+#map {
+    height: 500px;
+    width: 100%;
+
 }
 
 a:hover {
@@ -71,14 +77,6 @@ input[type='email'] {
     border: none;
     outline: none;
     box-shadow: none
-}
-
-img {
-    width: 40px;
-    height: 40px;
-    object-fit: cover;
-    border-radius: 50%;
-    position: relative
 }
 
 a[target='_blank'] {
