@@ -54,20 +54,37 @@
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
+          <!--This if validates if the user has an active session to show different options-->
+          {% if user.is_authenticated %}
           <ul class="navbar-nav me-auto">
             <li class="nav-item">
-              <a class="nav-link" href="#">Mis fincas</a>
+              <div class="dropdown text-end">
+                <a href="#" class="d-block link-body text-decoration-none text-light dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                  Fincas
+                </a>
+                <ul class="dropdown-menu text-small">
+                  <li><a class="dropdown-item" href="#">Mis fincas</a></li>
+                  <li><a class="dropdown-item" href="#">Añadir finca</a></li> 
+                </ul>
+              </div>
             <li>
             <li class="nav-item">
-              <a class="nav-link" href="{% url 'suppliers_list' %}">Proveedores</a>
+              <div class="dropdown text-end">
+                <a href="#" class="d-block link-body text-decoration-none text-light dropdown-toggle ms-2" data-bs-toggle="dropdown" aria-expanded="false">
+                  Proveedores
+                </a>
+                <ul class="dropdown-menu text-small">
+                  <li><a class="dropdown-item" href="{% url 'suppliers_list' %}">Lista de proveedores</a></li>
+                  <li><a class="dropdown-item" href="{% url 'supplier_add' %}">Añadir proveedor</a></li> 
+                </ul>
             <li>
           </ul>
+          {% endif %}
           <ul class="navbar-nav ms-auto">
             <li class="nav-item">
             <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search">
               <input type="search" class="form-control" placeholder="Search..." aria-label="Search">
             </form>
-
             </li>
             <li><a class="nav-link" href="/">Main</a></li>
             <!--This if validates if the user has an active session to show different options-->
@@ -76,7 +93,7 @@
               <a class="nav-link" href="{% url 'home' %}">Home</a>
             </li>
             <div class="dropdown text-end">
-              <a href="#" class="d-block link-body-emphasis text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+              <a href="#" class="d-block link-body text-light text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                 <img src= "{% static 'img/usuario.png' %}" alt="mdo" width="32" height="32" class="rounded-circle">
               </a>
               <ul class="dropdown-menu text-small">
