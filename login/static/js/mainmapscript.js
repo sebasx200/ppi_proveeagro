@@ -11,13 +11,16 @@ OpenStreetMap_Mapnik.addTo(map);
 
 let marker;
 
-function onMapClick(e) {
+var lat = document.getElementById('id_latitude');
+var lng = document.getElementById('id_longitude');
+
+map.on('click', function(e) {
     if (marker) {
         map.removeLayer(marker);
     }
     marker = L.marker(e.latlng).addTo(map);
+    lat.value = e.latlng.lat;
+    lng.value = e.latlng.lng;
+});
 
-}
-
-map.on('click', onMapClick);
 map.addControl(new L.Control.Fullscreen());
