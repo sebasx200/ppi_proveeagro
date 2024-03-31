@@ -1,0 +1,25 @@
+{% extends "supplier_crud/suppliers_list.html" %}
+
+{% load static %}
+
+{% block content %}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-4">
+            <h3>Añadir nuevo proveedor</h3>
+            <form method="post">
+                {{ form.as_p }}
+                {% csrf_token %}
+                <button type="submit">Añadir</button>
+            </form>
+        </div>
+        <div class="col-md-8">
+            <h3>Selecciona la ubicación del proveedor</h3>
+            <div id="map"></div>
+            <script src="{% static 'js/mainmapscript.js' %}"></script>
+        </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
