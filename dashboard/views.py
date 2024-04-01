@@ -24,16 +24,18 @@ def supplier_add(request):
     """
     this view is used to add a new supplier
     """
-    if request.method == 'POST':
+    if request.method == 'GET':
+        form = SupplierForm()
+        return render(request, 'supplier_crud/supplier_add.html', {'form': form})
+    else:
         form = SupplierForm(request.POST)
         if form.is_valid():
-
             new_supplier = form.save(commit=False)
             new_supplier.created_by = request.user
             new_supplier.save()
-
             return redirect('suppliers_list')
-    else:
-        form = SupplierForm()
-        return render(request, 'supplier_crud/supplier_add.html', {'form': form})
+        else:
+            error = form.errors
+            return render(request, 'supplier_crud/supplier_add.html', {'form': form, 'error': error})
+        
 

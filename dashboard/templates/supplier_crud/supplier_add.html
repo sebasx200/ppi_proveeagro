@@ -5,20 +5,54 @@
 {% block content %}
 
 <div class="container">
+    <!--row-->
     <div class="row">
         <div class="col-md-4">
             <h3>Añadir nuevo proveedor</h3>
+            <!--this is the form for a new supplier-->
             <form method="post">
-                {{ form.as_p }}
                 {% csrf_token %}
-                <button type="submit">Añadir</button>
+
+                <!--form inputs-->
+
+                <div class="form-group mb-2">
+                    <label for="name">Nombre</label>
+                    <input type="text" class="form-control" id="name" name="name" required>
+                </div>
+                <div class="form-group mb-2">
+                    <label for="address">Dirección</label>
+                    <input type="text" class="form-control" id="address" name="address" required>
+                </div>
+                <div class="form-group mb-2">
+                    <label for="id_latitude">Latitud</label>
+                    <input type="number" class="form-control" step="any" id="latitude" name="latitude">
+                </div>
+                <div class="form-group mb-2">
+                    <label for="id_longitude">Longitud</label>
+                    <input type="number" class="form-control" step="any" id="longitude" name="longitude">
+                </div>
+
+                <!--submit button-->
+
+                <div class="form-group mb-2">
+                    <button type="submit" class="btn btn-primary">Añadir</button>
+                </div>
+                {{ error }}
+
+                <!--end of form-->
+
             </form>
         </div>
+
+        <!--map div-->
         <div class="col-md-8">
             <h3>Selecciona la ubicación del proveedor</h3>
             <div id="map"></div>
-            <script src="{% static 'js/mainmapscript.js' %}"></script>
+            <script src="{% static 'dashboard/js/map_supplier.js' %}"></script>
         </div>
+
+        <!--end of row-->
+
         </div>
     </div>
 </div>

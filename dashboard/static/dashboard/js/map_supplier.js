@@ -11,8 +11,8 @@ OpenStreetMap_Mapnik.addTo(map);
 
 let marker;
 
-var lat = document.getElementById('id_latitude');
-var lng = document.getElementById('id_longitude');
+var lat = document.getElementById('latitude');
+var lng = document.getElementById('longitude');
 
 map.on('click', function(e) {
     if (marker) {
