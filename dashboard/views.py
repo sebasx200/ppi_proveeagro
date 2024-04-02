@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
-from .forms import SupplierForm
-from .models import Supplier
+from .forms import SupplierForm, LocationForm
+from .models import Supplier, Location, City, Department
 
 # Create your views here.
 
@@ -25,8 +25,18 @@ def supplier_add(request):
     this view is used to add a new supplier
     """
     if request.method == 'GET':
-        form = SupplierForm()
-        return render(request, 'supplier_crud/supplier_add.html', {'form': form})
+        
+        departments = Department.objects.all()
+        cities = City.objects.all()
+        form_supplier = SupplierForm()
+        location_form = LocationForm()
+        context ={
+            'departments': departments,
+            'cities': cities,
+            'form_supplier': form_supplier,
+            'location_form': location_form
+        }
+        return render(request, 'supplier_crud/supplier_add.html', context)
     else:
         form = SupplierForm(request.POST)
         if form.is_valid():

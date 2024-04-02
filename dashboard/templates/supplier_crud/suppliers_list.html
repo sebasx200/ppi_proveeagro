@@ -6,7 +6,9 @@
         <thead>
             <tr>
                 <th>Nombre</th>
-                <th>Telefono</th>
+                <th>Dirección</th>
+                <th>Ciudad</th>
+                <th>Departamento</th>
                 <th>Acciones</th>
             </tr>
         </thead>
@@ -14,7 +16,9 @@
             {% for supplier in suppliers %}
                 <tr>
                     <td>{{ supplier.name }}</td>
-                    <td>{{ supplier.address }}</td>
+                    <td>{{ supplier.id_location.address }}</td>
+                    <td>{{ supplier.id_location.id_city.name }}</td>
+                    <td>{{ supplier.id_location.id_city.id_department.name }}</td>
                     <td>
                         <a  class="btn btn-primary">Editar</a>
                         <a  class="btn btn-danger">Eliminar</a>
