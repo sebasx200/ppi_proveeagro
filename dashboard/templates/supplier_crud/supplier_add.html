@@ -33,9 +33,9 @@
                 </div>
                 <div class="form-group mb-2">
                     <label for="deparment" class="form-label">Departamento</label>
-                    <select class="form-select" id="department" name="department" onchange="updateCityOptions()" required>
+                    <select class="form-select" id="department" name="department" required>
                         <option value="">Selecciona el departamento</option>
-                        {% for department in departments %}
+                        {% for department in department_list %}
                         <option value="{{ department.id }}">{{ department.name }}</option>
                         {% endfor %}
                     </select>
@@ -44,9 +44,6 @@
                     <label for="city" class="form-label">Ciudad</label>
                     <select class="form-select" id="city" name="city" required>
                         <option value="">Selecciona la ciudad</option>
-                        {% for city in cities %}
-                        <option value="{{ city.id }}">{{ city.name }}</option>
-                        {% endfor %}
                     </select>
                 </div>                                
                 <!--submit button-->
@@ -58,6 +55,33 @@
 
                 <!--end of form-->
 
+                <!--script to filter cities by department-->
+                <script>
+                    // get the department and city elements
+                    var department = document.getElementById('department');
+                    var city = document.getElementById('city');
+                    // get the cities and departments from the context and parse them as JSON
+                    var cities = JSON.parse('{{ cities | escapejs }}');
+                    var departments = JSON.parse('{{ departments | escapejs }}');
+
+                    // add an event listener to the department select element
+                    department.addEventListener('change', function() {
+                        var selectedDepartment = department.value;
+                        var filteredCities = cities.filter(function(city) {
+                            return city.department == selectedDepartment;
+                        });
+                        // remove all the options from the city select element
+                        city.innerHTML = '<option value="">Selecciona la ciudad</option>';
+                        // add the filtered cities to the city select element
+                        filteredCities.forEach(function(filteredCity) {
+                            var option = document.createElement('option');
+                            option.value = filteredCity.id;
+                            option.textContent = filteredCity.name;
+                            city.appendChild(option);
+                        });
+                    });
+                </script>
+                <!--end of script-->
             </form>
         </div>
 
