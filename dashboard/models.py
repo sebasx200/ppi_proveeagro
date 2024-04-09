@@ -9,6 +9,8 @@ class Supplier(models.Model):
     """
 
     name = models.CharField(max_length=250, verbose_name='Supplier Name')
+    email = models.EmailField(max_length=250, verbose_name='Email Address')
+    phone = models.CharField(max_length=250, verbose_name='Phone Number')
     created_at = models.DateTimeField(auto_now_add=True, verbose_name='Created At')
     updated_at = models.DateTimeField(auto_now=True, verbose_name='Updated At')
     created_by = models.ForeignKey('auth.User', on_delete=models.CASCADE, related_name='supplier_created_by', verbose_name='Created By')
