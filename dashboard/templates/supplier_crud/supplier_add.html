@@ -16,23 +16,15 @@
                 <!--form inputs-->
 
                 <div class="form-group mb-2">
-                    <label for="name">Nombre</label>
+                    <label for="name">Nombre <span class="text-danger">*</span></label>
                     <input type="text" class="form-control" id="name" name="name" required>
                 </div>
                 <div class="form-group mb-2">
-                    <label for="address">Dirección</label>
+                    <label for="address">Dirección <span class="text-danger">*</span></label>
                     <input type="text" class="form-control" id="address" name="address" required>
                 </div>
                 <div class="form-group mb-2">
-                    <label for="id_latitude">Latitud</label>
-                    <input type="number" class="form-control" step="any" id="latitude" name="latitude">
-                </div>
-                <div class="form-group mb-2">
-                    <label for="id_longitude">Longitud</label>
-                    <input type="number" class="form-control" step="any" id="longitude" name="longitude">
-                </div>
-                <div class="form-group mb-2">
-                    <label for="deparment" class="form-label">Departamento</label>
+                    <label for="deparment" class="form-label">Departamento <span class="text-danger">*</span></label>
                     <select class="form-select" id="department" name="department" required>
                         <option value="">Selecciona el departamento</option>
                         {% for department in department_list %}
@@ -41,15 +33,26 @@
                     </select>
                 </div>
                 <div class="form-group mb-2">
-                    <label for="city" class="form-label">Ciudad</label>
+                    <label for="city" class="form-label">Ciudad <span class="text-danger">*</span></label>
                     <select class="form-select" id="city" name="city" required>
                         <option value="">Selecciona la ciudad</option>
                     </select>
+                </div>
+                <div class="form-group mb-2">
+                    <label>Selecciona un lugar en el mapa para obtener las coordenenadas del proveedor(opcional)</label>
+                </div>
+                <div class="form-group mb-2">
+                    <label for="id_latitude">Latitud</label>
+                    <input type="number" class="form-control" step="any" id="latitude" name="latitude" disabled>
+                </div>
+                <div class="form-group mb-2">
+                    <label for="id_longitude">Longitud</label>
+                    <input type="number" class="form-control" step="any" id="longitude" name="longitude" disabled>
                 </div>                                
                 <!--submit button-->
 
-                <div class="form-group mb-2">
-                    <button type="submit" class="btn btn-primary">Añadir</button>
+                <div class="form-group mt-3">
+                    <button type="submit" class="btn btn-primary">Añadir proveedor</button>
                 </div>
                 {{ error }}
 
