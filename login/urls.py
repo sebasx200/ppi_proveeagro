@@ -1,6 +1,8 @@
 from django.urls import path
 from . import views
 
+# URL configuration for the login app
+
 urlpatterns = [
     path('', views.main, name='main'),
     path('login/', views.login_page, name='login_page'),
