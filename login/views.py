@@ -1,10 +1,11 @@
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render, redirect
 from .forms import CreateNewUser
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
+from dashboard.models import Supplier
 import folium
 from folium import plugins
 # Create your views here.
@@ -14,6 +15,12 @@ def main(request):
     this function redirects to the index.html file for the main page
     """
     return render(request, 'main.html')
+
+def get_suppliers(request):
+    suppliers_list = Supplier.objects.all()
+    suppliers = [{'id': supplier.id, 'name': supplier.name, 'latitude': supplier.location.latitude,
+                    'longitude': supplier.location.longitude, 'address': supplier.location.address} for supplier in suppliers_list]
+    return JsonResponse(suppliers, safe=False)
 
 def login_page(request):
     """
