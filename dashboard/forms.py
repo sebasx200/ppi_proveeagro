@@ -1,7 +1,12 @@
 from django.forms import ModelForm
-from .models import Supplier
+from .models import Supplier, Location, City, Department
 
 class SupplierForm(ModelForm):
     class Meta:
         model = Supplier
-        fields = ['name', 'address', 'latitude', 'longitude']
+        fields = ['name']
+
+class LocationForm(ModelForm):
+    class Meta:
+        model = Location
+        fields = ['address', 'latitude', 'longitude']
