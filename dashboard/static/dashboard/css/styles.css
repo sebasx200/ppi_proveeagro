@@ -11,6 +11,7 @@ body{
     background-image: url("../img/bg_dashboard.png");
     background-size: cover; /* La imagen se ajustará para cubrir el área completa */
     background-repeat: no-repeat; /* Evita que la imagen se repita */
+    background-attachment: fixed; /* La imagen de fondo no se desplazará con el contenido */
 }
 
 #map {

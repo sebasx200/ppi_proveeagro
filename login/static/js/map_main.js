@@ -16,16 +16,16 @@ map.addControl(new L.Control.Fullscreen());
 // Add geocoder control
 L.Control.geocoder().addTo(map);
 
+// Add locate control
 var lc = L.control
   .locate({
     position: "topleft",
     strings: {
       title: "Mostrar dónde estoy"
     }
-  })
-
-  .addTo(map);
+  }).addTo(map);
   
+// Add the suppliers to the map from the database  
 fetch('/get_suppliers/')
   .then(response => response.json())
   .then(suppliers => {
