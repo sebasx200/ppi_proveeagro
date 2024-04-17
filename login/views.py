@@ -14,7 +14,11 @@ def main(request):
     """
     this function redirects to the index.html file for the main page
     """
-    return render(request, 'main.html')
+    suppliers = Supplier.objects.all()
+    context = {
+        'suppliers': suppliers
+    }
+    return render(request, 'main.html', context)
 
 def get_suppliers(request):
     suppliers_list = Supplier.objects.all()
