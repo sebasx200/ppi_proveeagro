@@ -1,20 +1,10 @@
-{% extends 'base.html' %}
-
-{% load static %}
-
-{% block content %}
+{% extends 'base.html' %} {% load static %} {% block content %}
 <div class="content bg-dark text-light p-3">
   <div class="row">
-      <div class="col-md-4">
-          <h3>Proveedores cercanos</h3>
-          <ol class="list-group" id="nearby_suppliers">
-              
-            </ol>
-      </div>
-      <div class="col-md-8">
-          <div id="map"></div>
-          
-      </div>
+    <div class="col-md-12">
+      <h1 class="text-center">Proveedores cercanos de Medellín</h1>
+      <div id="map"></div>
+    </div>
   </div>
 </div>
 <script src="{% static 'js/map_main.js' %}"></script>
