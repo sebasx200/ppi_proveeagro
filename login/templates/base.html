@@ -31,7 +31,7 @@
 
     <!-- if the user isn't logged in the app, this will be the css style -->
     {% if not user.is_authenticated %}
-    <link rel="stylesheet" href="{% static 'css/styles.css' %}" />
+    <link rel="stylesheet" href="{% static 'login/css/styles.css' %}" />
     {% endif %}
 
     <!-- if the user is logged in the app, this will be the css style -->
@@ -100,7 +100,7 @@
             </li>
             <div class="dropdown text-end">
               <a href="#" class="d-block link-body text-light text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                <img src= "{% static 'img/usuario.png' %}" alt="mdo" width="32" height="32" class="rounded-circle">
+                <img src= "{% static 'login/img/usuario.png' %}" alt="mdo" width="32" height="32" class="rounded-circle">
               </a>
               <ul class="dropdown-menu text-small">
                 <li><a class="dropdown-item" href="#">New project...</a></li>

@@ -5,7 +5,7 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
-from dashboard.models import Supplier
+from suppliers.models import Supplier
 import folium
 from folium import plugins
 # Create your views here.
@@ -84,13 +84,3 @@ def logout_sesion(request):
     """
     logout(request)
     return redirect('main')
-
-@login_required
-def home(request):
-    """
-    this function redirects to the home.html file for the home page when the user logs in or signs up
-    """
-    # the username is passed to the home.html file to be displayed
-    username = request.user.username if request.user.is_authenticated else None
-    
-    return render(request, 'home.html', {'username': username})
