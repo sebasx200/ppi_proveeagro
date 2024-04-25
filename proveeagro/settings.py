@@ -36,14 +36,13 @@ INSTALLED_APPS = [
     'dashboard',
     'suppliers',
     'farms',
-    'admin_interface',
+    'jazzmin',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'colorfield',
 ]
 X_FRAME_OPTIONS = 'SAMEORIGIN'
 
@@ -143,3 +142,13 @@ LOGIN_URL = 'login_page'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Jazzmin settings
+JAZZMIN_SETTINGS = {
+    "site_title": "ProveeAgro",
+    "site_header": "ProveeAgro",
+    "site_logo": "login/img/logo_proveeagro.png",
+    "site_brand": "ProveeAgro",
+    
+}
+JAZZMIN_SETTINGS["show_ui_builder"] = True
