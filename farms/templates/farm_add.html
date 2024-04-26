@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container">
+    <!--row-->
+    <div class="row">
+        <div class="col-md-4">
+            <h3>Añadir nueva finca</h3>
+            <!--this is the form for a new farm-->
+            <form method="post">
+                {% csrf_token %}
+                {{ form_farm.as_p }}
+                {{ form_location.as_p }}
+                <select class="form-select" id="department" name="department" required>
+                    <option value="">Selecciona el tipo de finca</option>
+                    {% for farm_type in farm_types %}
+                    <option value="{{ farm_type.id }}">{{ farm_type.name }}</option>
+                    {% endfor %}
+                </select>
+                <button type="submit">Añadir finca</button>
+            </form>
+        </div>
+    </div>
+</div>
+    
+{% endblock %}
