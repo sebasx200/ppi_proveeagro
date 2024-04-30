@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from suppliers.forms import SupplierForm, LocationForm
 from suppliers.models import City, Department
-from .models import Farm, FarmType
+from .models import Farm, Farm_Type
 from .forms import FarmForm
 import json
 
@@ -44,7 +44,7 @@ def farm_add(request):
     if request.method == 'GET':
         
         # get the list of farm types to pass them to the template
-        farm_types_list = FarmType.objects.all()
+        farm_types_list = Farm_Type.objects.all()
         # get the list of departments to pass them to the template
         departments_list = Department.objects.all()
         cities_list = City.objects.all()

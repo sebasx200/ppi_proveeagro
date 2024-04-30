@@ -7,92 +7,62 @@ class Farm(models.Model):
     """
     this class is used to create a new table for farms in the database with the following fields
     """
-    name = models.CharField(max_length=100, verbose_name='Farm Name')
-    created_at = models.DateTimeField(auto_now_add=True, verbose_name='Created At')
-    updated_at = models.DateTimeField(auto_now=True, verbose_name='Updated At')
-    user = models.ForeignKey('auth.User', on_delete=models.CASCADE, verbose_name='User')
-    location = models.ForeignKey(Location, on_delete=models.CASCADE, verbose_name='Location')
-    farm_type = models.ForeignKey('FarmType', on_delete=models.CASCADE, verbose_name='Farm Type')
+    name = models.CharField(max_length=100, verbose_name='Nombre de la finca')
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name='Creado en')
+    updated_at = models.DateTimeField(auto_now=True, verbose_name='Actualizado en')
+    user = models.ForeignKey('auth.User', on_delete=models.CASCADE, verbose_name='Usuario')
+    location = models.ForeignKey(Location, on_delete=models.CASCADE, verbose_name='Ubicación')
+    farm_type = models.ForeignKey('Farm_Type', on_delete=models.CASCADE, verbose_name='Tipo de finca')
 
     class Meta:
-        verbose_name = 'Farm'
-        verbose_name_plural = 'Farms'
+        verbose_name = 'Finca'
+        verbose_name_plural = 'Fincas'
         ordering = ['name']
 
     def __str__(self):
         return self.name
-    
-class FarmType(models.Model):
+
+class Farm_Type(models.Model):
     """
     this class is used to create a new table in the database for farm types with the following fields
     """
-    name = models.CharField(max_length=100, verbose_name='Farm Type')
+    name = models.CharField(max_length=100, verbose_name='Tipo de finca')
 
     class Meta:
-        verbose_name = 'Farm Type'
-        verbose_name_plural = 'Farm Types'
+        verbose_name = 'Tipo de finca'
+        verbose_name_plural = 'Tipos de finca'
         ordering = ['name']
 
     def __str__(self):
         return self.name
     
-class Crop_Type(models.Model):
+class CropOrLivestock_Type(models.Model):
     """
-    this class is used to create a new table in the database for crop types with the following fields
+    this class is used to create a new table in the database for crops or livestock types with the following fields
     """
-    name = models.CharField(max_length=100, verbose_name='Crop Type')
+    name = models.CharField(max_length=100, verbose_name='Ganado o Cultivo')
+    farm_type = models.ForeignKey(Farm_Type, on_delete=models.CASCADE, verbose_name='Tipo de finca')
 
     class Meta:
-        verbose_name = 'Crop Type'
-        verbose_name_plural = 'Crop Types'
+        verbose_name = 'Ganado o Cultivo'
+        verbose_name_plural = 'Ganados o Cultivos'
         ordering = ['name']
 
     def __str__(self):
         return self.name
     
-class Crop(models.Model):
+class CropOrLivestock(models.Model):
     """
-    this class is used to create a new table in the database for crops with the following fields
+    this class is used to create a new table in the database for crops or livestock with the following fields
     """
-    name = models.CharField(max_length=100, verbose_name='Crop Name')
-    created_at = models.DateTimeField(auto_now_add=True, verbose_name='Created At')
-    updated_at = models.DateTimeField(auto_now=True, verbose_name='Updated At')
-    crop_type = models.ForeignKey(Crop_Type, on_delete=models.CASCADE, verbose_name='Crop Type')
+    name = models.CharField(max_length=100, verbose_name='Variedad de cultivo o ganado')
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name='Creado en')
+    updated_at = models.DateTimeField(auto_now=True, verbose_name='Actualizado en')
+    crop_or_livestock_type = models.ForeignKey(CropOrLivestock_Type, on_delete=models.CASCADE, verbose_name='Ganado o Cultivo')
 
     class Meta:
-        verbose_name = 'Crop'
-        verbose_name_plural = 'Crops'
-        ordering = ['name']
-
-    def __str__(self):
-        return self.name
-    
-class Livestock_Type(models.Model):
-    """
-    this class is used to create a new table in the database for livestock types with the following fields
-    """
-    name = models.CharField(max_length=100, verbose_name='Livestock Type')
-
-    class Meta:
-        verbose_name = 'Livestock Type'
-        verbose_name_plural = 'Livestock Types'
-        ordering = ['name']
-
-    def __str__(self):
-        return self.name
-    
-class Livestock(models.Model):
-    """
-    this class is used to create a new table in the database for livestock with the following fields
-    """
-    name = models.CharField(max_length=100, verbose_name='Livestock Name')
-    created_at = models.DateTimeField(auto_now_add=True, verbose_name='Created At')
-    updated_at = models.DateTimeField(auto_now=True, verbose_name='Updated At')
-    livestock_type = models.ForeignKey(Livestock_Type, on_delete=models.CASCADE, verbose_name='Livestock Type')
-
-    class Meta:
-        verbose_name = 'Livestock'
-        verbose_name_plural = 'Livestocks'
+        verbose_name = 'Variedad de cultivo o ganado'
+        verbose_name_plural = 'Variedades de cultivo o ganado'
         ordering = ['name']
 
     def __str__(self):
