@@ -4,6 +4,8 @@ from suppliers.forms import SupplierForm, LocationForm
 from suppliers.models import City, Department
 from .models import Farm, Farm_Type
 from .forms import FarmForm
+from rest_framework import viewsets
+from .serializer import FarmSerializer
 import json
 
 # Create your views here.
@@ -67,3 +69,7 @@ def farm_add(request):
             'form_location': form_location
         }
         return render(request, 'farm_add.html', context)
+
+class FarmView(viewsets.ModelViewSet):
+    serializer_class = FarmSerializer
+    queryset = Farm.objects.all()
