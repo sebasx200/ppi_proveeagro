@@ -20,9 +20,21 @@ export function FarmsFormPage() {
         <input
           type="text"
           placeholder="dirección"
-          {...register("address", { required: true })}
+          {...register("location", { required: true })}
         />
-        {errors.address && <span>La dirección es requerida</span>}
+        {errors.location && <span>La dirección es requerida</span>}
+        <input
+          type="text"
+          placeholder="usuario"
+          {...register("user", { required: true })}
+        />
+        {errors.user && <span>El usuario es requerido</span>}
+        <input
+          type="text"
+          placeholder="tipo de finca"
+          {...register("farm_type", { required: true })}
+        />
+        {errors.farm_type && <span>El tipo de finca es requerido</span>}
         <button>Guardar</button>
       </form>
     </div>
