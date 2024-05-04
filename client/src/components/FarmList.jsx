@@ -17,7 +17,7 @@ export function FarmList(){
     
     return <div>
         {farms.map((farm) => (
-            <FarmCard key={farm.id} farm={farm}/>
+            <FarmCard key = {farm.id} farm={farm}/>
         ))}
     </div>;
 }
