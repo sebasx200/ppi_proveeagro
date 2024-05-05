@@ -2,6 +2,8 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from .forms import SupplierForm, LocationForm
 from .models import Supplier, Location, City, Department
+from .serializer import SupplierSerializer
+from rest_framework import viewsets
 import json
 
 # Create your views here.
@@ -72,3 +74,10 @@ def supplier_add(request):
                 'error': error
             }   
             return render(request, 'supplier_add.html', context)
+        
+class SupplierView(viewsets.ModelViewSet):
+    """
+    this class is used to create the CRUD views for the suppliers
+    """
+    queryset = Supplier.objects.all()
+    serializer_class = SupplierSerializer
