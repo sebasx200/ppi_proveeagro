@@ -10,6 +10,7 @@ class FarmSerializer(serializers.ModelSerializer):
     class Meta:
         model = Farm
         fields = ['id','name', 'user', 'location', 'farm_type']
+        extra_kwargs = {'user': {'write_only': True}}
 
     def create(self, validated_data):
         location_data = validated_data.pop('location')
