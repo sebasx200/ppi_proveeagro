@@ -33,10 +33,6 @@ body{
     box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
     margin: auto;
     position: absolute;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
   
   }
 
@@ -56,9 +52,9 @@ a:hover {
     margin: 0;
 }
 
-#loginButton {
+.login-button {
     border-radius: 10px;
-    width: 50%;
+    width: 55%;
 }
 .btn.btn-success:hover {
     background-color: white;

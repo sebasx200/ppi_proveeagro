@@ -25,10 +25,24 @@ function FormButton({ itemID, text, className }) {
 }
 
 function FormLabel({ text }) {
-    return (
-        <label className="form-labels">
-        {text}
-        </label>
-    );
+  return <label className="form-labels">{text}</label>;
 }
-export { ToggleButton, FormButton, FormLabel };
+
+function FormPanel({ children }) {
+  return (
+    <div className="container-fluid">
+      <div
+        className="row justify-content-center align-items-center"
+        style={{ minHeight: "100vh" }}>
+        <div className="col-md-8 panel">
+          <div className="row">{children}</div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function DivInput({ children }) {
+  return <div className="form-floating mb-2">{children}</div>;
+}
+export { FormPanel, DivInput, ToggleButton, FormButton, FormLabel };
