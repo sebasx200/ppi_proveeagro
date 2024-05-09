@@ -9,27 +9,42 @@
 }
 
 body{
-    background-image: url("../img/background_1.png");
+    background-image: url("./img/form-img/img6.png");
     background-size: cover; /* La imagen se ajustará para cubrir el área completa */
     background-repeat: no-repeat; /* Evita que la imagen se repita */
 }
 
-.panel-heading {
-    text-align: center;
-    margin-bottom: 10px
-}
+.form-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* This makes the container take up the full height of the viewport */
+  }
+
+  .panel{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 70%; /* Adjust the width as needed */
+    height: 90%; /* Adjust the height as needed */
+    background-color: rgba(236, 236, 236, 0.8);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+    margin: auto;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+  
+  }
 
 #forgot {
     min-width: 100px;
     margin-right: auto;
     text-decoration: none;
     float: right;
-}
-
-#map {
-    height: 500px;
-    width: 100%;
-
 }
 
 a:hover {
@@ -41,14 +56,13 @@ a:hover {
     margin: 0;
 }
 
-.btn.btn-primary {
+#loginButton {
     border-radius: 10px;
-    width: 100%;
+    width: 50%;
 }
-
-.panel {
-    min-height: 380px;
-    border-radius: 12px
+.btn.btn-success:hover {
+    background-color: white;
+    color: green;
 }
 
 .form-labels{
@@ -63,57 +77,3 @@ a:hover {
     cursor: pointer;
     
 }
-
-input[type='text'],
-input[type='password'],
-input[type='email'] {
-    border: 1px solid #ddd;
-    outline: none;
-    box-shadow: none;
-    width: 100%;
-}
-
-.fa-eye-slash.btn {
-    border: none;
-    outline: none;
-    box-shadow: none
-}
-
-a[target='_blank'] {
-    position: relative;
-    transition: all 0.1s ease-in-out
-}
-
-.bordert {
-    border-top: 1px solid #aaa;
-    position: relative
-}
-
-.bordert:after {
-    content: "or connect with";
-    position: absolute;
-    top: -13px;
-    left: 33%;
-    background-color: #fff;
-    padding: 0px 8px
-}
-
-@media(max-width: 360px) {
-    #forgot {
-        margin-left: 0;
-        padding-top: 10px
-    }
-
-    body {
-        height: 100%
-    }
-
-    .container {
-        margin: 30px 0
-    }
-
-    .bordert:after {
-        left: 25%
-    }
-}
-/*End of login and signup form*/

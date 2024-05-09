@@ -1,6 +1,8 @@
+import FormRegister from "../../components/login-forms/FormRegister";
+
 function Register (){
     return(
-        <div>Register page</div>
+        <FormRegister route="/login/user/register/"/>
     )
 }
 
