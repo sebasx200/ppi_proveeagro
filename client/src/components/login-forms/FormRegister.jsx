@@ -1,7 +1,8 @@
 import { useState } from "react";
-import { set, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
+import { toast} from "react-hot-toast";
 
 import userApi from "../../api/userApi";
 
@@ -15,45 +16,29 @@ import {
 } from "../ui/FormComponents";
 
 function FormRegister() {
-  const [form, setForm] = useState({
-    username: "",
-    password: "",
-    email: "",
-    name: "",
-    last_name: ""
-  });
-
-  const handleChange = (e) => {
-    setForm({
-      ...form,
-      [e.target.name]: e.target.value
-    });
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setLoading(true);
-    try {
-      const response = await userApi.post('/login/user/register/', form);
-      navigate("/login");
-      console.log(response.data);
-    } catch (error) {
-      console.error(error.response.data);
-    }finally{
-      setLoading(false);
-    }
-
-  };
-
-  const test = (e) => {
-    e.preventDefault();
-    console.log("hola");
-  };
-
-
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+  const [serverError, setServerError] = useState(null);
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+
+  const onSubmit = handleSubmit(async (data) => {
+    setLoading(true);
+    try {
+      await userApi.post("/login/user/register/", data);
+      toast.success("Usuario registrado correctamente");
+      navigate("/login");
+    } catch (error) {
+      setServerError(error.response.data);
+      toast.error("Error al registrar usuario");
+    } finally {
+      setLoading(false);
+    }
+  });
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
@@ -72,7 +57,13 @@ function FormRegister() {
         </p>
       </div>
       <div className="col-md-6">
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={onSubmit}>
+          <div className="panel-heading">
+            <h3 className="pt-3 font-weight-bold text-center">Registrarse</h3>
+          </div>
+          {errors.username && (
+            <span className="text-danger">El usuario es requerido</span>
+          )}
           <DivInput>
             <i className="bi bi-person-fill text-success me-2"></i>
             <input
@@ -81,12 +72,13 @@ function FormRegister() {
               className="form-control"
               name="username"
               placeholder="Tu usuario"
-              value={form.username} onChange={handleChange}
-              required
+              {...register("username", { required: true })}
             />
             <FormLabel text={"Nuevo usuario"} />
           </DivInput>
-
+          {errors.password && (
+            <span className="text-danger">La contraseña es requerida</span>
+          )}
           <DivInput>
             <i className="bi bi-lock-fill text-success me-2"></i>
             <input
@@ -95,8 +87,7 @@ function FormRegister() {
               className="form-control"
               name="password"
               placeholder="Contraseña"
-              value={form.password} onChange={handleChange}
-              required
+              {...register("password", { required: true })}
             />
             <ToggleButton
               itemID="passwordButton"
@@ -105,6 +96,9 @@ function FormRegister() {
             />
             <FormLabel text={"Nueva contraseña"} />
           </DivInput>
+          {errors.email && (
+            <span className="text-danger">El correo es requerido</span>
+          )}
           <DivInput>
             <i className="bi bi-envelope-at-fill text-success me-2"></i>
             <input
@@ -113,11 +107,13 @@ function FormRegister() {
               className="form-control"
               name="email"
               placeholder="Tu correo electrónico"
-              value={form.email} onChange={handleChange}
-              required
+              {...register("email", { required: true })}
             />
             <FormLabel text={"Nuevo correo electrónico"} />
           </DivInput>
+          {errors.name && (
+            <span className="text-danger">El nombre es requerido</span>
+          )}
           <DivInput>
             <i className="bi bi-person-lines-fill text-success me-2"></i>
             <input
@@ -126,11 +122,13 @@ function FormRegister() {
               className="form-control"
               name="name"
               placeholder="Nombre"
-              value={form.name} onChange={handleChange}
-              required
+              {...register("name", { required: true })}
             />
             <FormLabel text={"Ingresa tu nombre"} />
           </DivInput>
+          {errors.last_name && (
+            <span className="text-danger">El apellido es requerido</span>
+          )}
           <DivInput>
             <i className="bi bi-person-lines-fill text-success me-2"></i>
             <input
@@ -139,8 +137,7 @@ function FormRegister() {
               className="form-control"
               name="last_name"
               placeholder="Apellido"
-              value={form.last_name} onChange={handleChange}
-              required
+              {...register("last_name", { required: true })}
             />
             <FormLabel text={"Ingresa tu apellido"} />
           </DivInput>
@@ -151,7 +148,14 @@ function FormRegister() {
               className="btn btn-success"
             />
           </div>
-
+          {serverError &&
+            Object.keys(serverError).map((key) => (
+              <div class="alert alert-danger mt-3" role="alert">
+                <p key={key}>
+                  {key}: {serverError[key]}
+                </p>
+              </div>
+            ))}
           <div className="text-center pt-4 text-muted">
             ¿Ya tienes una cuenta?
             <Link to="/login" className="text-decoration-none">

@@ -3,6 +3,7 @@ import userApi from "../../api/userApi";
 import { Form, useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { ACCESS_TOKEN, REFRESH_TOKEN } from "../../constants";
+import { toast} from "react-hot-toast";
 
 // import components
 import {
@@ -35,9 +36,10 @@ function FormLogin({ route }) {
 
       localStorage.setItem(ACCESS_TOKEN, res.data.access);
       localStorage.setItem(REFRESH_TOKEN, res.data.refresh);
+      toast.success("Bienvenido a Proveeagro " + username)
       navigate("/");
     } catch (error) {
-      alert(error);
+      toast.error("Error al iniciar sesión");
     } finally {
       setLoading(false);
     }
