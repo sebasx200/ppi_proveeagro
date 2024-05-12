@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
-import { toast} from "react-hot-toast";
+import { toast } from "react-hot-toast";
 
 import userApi from "../../api/userApi";
 
@@ -149,13 +149,14 @@ function FormRegister() {
             />
           </div>
           {serverError &&
-            Object.keys(serverError).map((key) => (
-              <div class="alert alert-danger mt-3" role="alert">
-                <p key={key}>
+            Object.keys(serverError).map((key, index) => (
+              <div key={index} className="alert alert-danger mt-3" role="alert">
+                <p>
                   {key}: {serverError[key]}
                 </p>
               </div>
             ))}
+
           <div className="text-center pt-4 text-muted">
             ¿Ya tienes una cuenta?
             <Link to="/login" className="text-decoration-none">
