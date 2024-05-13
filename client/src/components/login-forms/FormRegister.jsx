@@ -61,9 +61,6 @@ function FormRegister() {
           <div className="panel-heading">
             <h3 className="pt-3 font-weight-bold text-center">Registrarse</h3>
           </div>
-          {errors.username && (
-            <span className="text-danger">El usuario es requerido</span>
-          )}
           <DivInput>
             <i className="bi bi-person-fill text-success me-2"></i>
             <input
@@ -73,12 +70,10 @@ function FormRegister() {
               name="username"
               placeholder="Tu usuario"
               {...register("username", { required: true })}
+              required
             />
             <FormLabel text={"Nuevo usuario"} />
           </DivInput>
-          {errors.password && (
-            <span className="text-danger">La contraseña es requerida</span>
-          )}
           <DivInput>
             <i className="bi bi-lock-fill text-success me-2"></i>
             <input
@@ -88,6 +83,7 @@ function FormRegister() {
               name="password"
               placeholder="Contraseña"
               {...register("password", { required: true })}
+              required
             />
             <ToggleButton
               itemID="passwordButton"
@@ -96,39 +92,50 @@ function FormRegister() {
             />
             <FormLabel text={"Nueva contraseña"} />
           </DivInput>
-          {errors.email && (
-            <span className="text-danger">El correo es requerido</span>
-          )}
+          <DivInput>
+            <i className="bi bi-lock-fill text-success me-2"></i>
+            <input
+              id="password2"
+              type={showPassword ? "text" : "password"}
+              className="form-control"
+              name="password2"
+              placeholder="Contraseña"
+              {...register("password2", { required: true })}
+              required
+            />
+            <ToggleButton
+              itemID="passwordButton"
+              togglePasswordVisibility={togglePasswordVisibility}
+              showPassword={showPassword}
+            />
+            <FormLabel text={"Confirmar contraseña"} />
+          </DivInput>
           <DivInput>
             <i className="bi bi-envelope-at-fill text-success me-2"></i>
             <input
               id="email"
-              type="text"
+              type="email"
               className="form-control"
               name="email"
               placeholder="Tu correo electrónico"
               {...register("email", { required: true })}
+              required
             />
             <FormLabel text={"Nuevo correo electrónico"} />
           </DivInput>
-          {errors.name && (
-            <span className="text-danger">El nombre es requerido</span>
-          )}
           <DivInput>
             <i className="bi bi-person-lines-fill text-success me-2"></i>
             <input
-              id="name"
+              id="first_name"
               type="text"
               className="form-control"
-              name="name"
+              name="first_name"
               placeholder="Nombre"
-              {...register("name", { required: true })}
+              {...register("first_name", { required: true })}
+              required
             />
             <FormLabel text={"Ingresa tu nombre"} />
           </DivInput>
-          {errors.last_name && (
-            <span className="text-danger">El apellido es requerido</span>
-          )}
           <DivInput>
             <i className="bi bi-person-lines-fill text-success me-2"></i>
             <input
@@ -138,6 +145,7 @@ function FormRegister() {
               name="last_name"
               placeholder="Apellido"
               {...register("last_name", { required: true })}
+              required
             />
             <FormLabel text={"Ingresa tu apellido"} />
           </DivInput>
@@ -156,7 +164,6 @@ function FormRegister() {
                 </p>
               </div>
             ))}
-
           <div className="text-center pt-4 text-muted">
             ¿Ya tienes una cuenta?
             <Link to="/login" className="text-decoration-none">
