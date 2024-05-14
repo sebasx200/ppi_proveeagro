@@ -1,10 +1,20 @@
 from rest_framework import serializers
 from .models import Supplier, Location, City, Department
 
+class DepartmentSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Department
+        fields = ('name',)
+
+class CitySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = City
+        fields = ('name', 'department')
+
 class LocationSerializer(serializers.ModelSerializer):
     class Meta:
         model = Location
-        fields = ('address', 'city')
+        fields = ('address', 'latitude', 'longitude', 'city')
 
 class SupplierSerializer(serializers.ModelSerializer):
     location = LocationSerializer()

@@ -6,8 +6,6 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from suppliers.models import Supplier
-import folium
-from folium import plugins
 # Create your views here.
 
 def main(request):

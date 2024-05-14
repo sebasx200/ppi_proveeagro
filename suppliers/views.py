@@ -2,8 +2,9 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from .forms import SupplierForm, LocationForm
 from .models import Supplier, Location, City, Department
-from .serializer import SupplierSerializer
+from .serializer import SupplierSerializer, LocationSerializer, DepartmentSerializer, CitySerializer
 from rest_framework import viewsets
+from rest_framework.permissions import IsAuthenticated, AllowAny
 import json
 
 # Create your views here.
@@ -79,5 +80,32 @@ class SupplierView(viewsets.ModelViewSet):
     """
     this class is used to create the CRUD views for the suppliers
     """
-    queryset = Supplier.objects.all()
     serializer_class = SupplierSerializer
+    permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+        return Supplier.objects.filter(created_by=self.request.user.id)
+
+class LocationView(viewsets.ReadOnlyModelViewSet):
+    """
+    this class is used to get the list of locations
+    """
+    serializer_class = LocationSerializer
+    permission_classes = [IsAuthenticated]
+    queryset = Location.objects.all()
+
+class CityView(viewsets.ReadOnlyModelViewSet):
+    """
+    this class is used to get the list of cities
+    """
+    serializer_class = CitySerializer
+    permission_classes = [IsAuthenticated]
+    queryset = City.objects.all()
+
+class DepartmentView(viewsets.ReadOnlyModelViewSet):
+    """
+    this class is used to get the list of departments
+    """
+    serializer_class = DepartmentSerializer
+    permission_classes = [IsAuthenticated]
+    queryset = Department.objects.all()
