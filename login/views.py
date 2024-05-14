@@ -6,6 +6,14 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from suppliers.models import Supplier
+
+# new imports for the API
+from rest_framework import generics
+from rest_framework.permissions import IsAuthenticated, AllowAny
+from .serializer import UserSerializer
+
+
+
 # Create your views here.
 
 def main(request):
@@ -82,3 +90,9 @@ def logout_sesion(request):
     """
     logout(request)
     return redirect('main')
+
+class CreateUserView(generics.CreateAPIView):
+
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+    permission_classes = [AllowAny]
