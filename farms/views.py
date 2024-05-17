@@ -4,7 +4,8 @@ from suppliers.forms import SupplierForm, LocationForm
 from suppliers.models import City, Department
 from .models import Farm, Farm_Type
 from .forms import FarmForm
-from rest_framework import viewsets
+from rest_framework import viewsets, generics
+from rest_framework.permissions import IsAuthenticated, AllowAny
 from .serializer import FarmSerializer
 import json
 
@@ -69,6 +70,30 @@ def farm_add(request):
             'form_location': form_location
         }
         return render(request, 'farm_add.html', context)
+
+class FarmList(generics.ListCreateAPIView):
+    serializer_class = FarmSerializer
+    permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+        user = self.request.user
+        return Farm.objects.filter(user=user)
+    
+    def perform_create(self, serializer):
+        if serializer.is_valid():
+            serializer.save(user=self.request.user)
+
+        else:
+            print(serializer.errors)
+
+class FarmDelete(generics.DestroyAPIView):
+    serializer_class = FarmSerializer
+    permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+        user = self.request.user
+        return Farm.objects.filter(user=user)
+
 
 class FarmView(viewsets.ModelViewSet):
     serializer_class = FarmSerializer
