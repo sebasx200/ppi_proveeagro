@@ -84,7 +84,11 @@ class SupplierView(viewsets.ModelViewSet):
     permission_classes = [IsAuthenticated]
 
     def get_queryset(self):
-        return Supplier.objects.filter(created_by=self.request.user.id)
+        user = self.request.user
+        return Supplier.objects.filter(created_by=user)
+    
+    def perform_create(self, serializer):
+        serializer.save(created_by=self.request.user)
 
 class LocationView(viewsets.ReadOnlyModelViewSet):
     """
