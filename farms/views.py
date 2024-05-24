@@ -1,5 +1,5 @@
 # This file is used to create the views for the farms app
-from .models import Farm, Farm_Type
+from .models import Farm
 from rest_framework import viewsets, generics
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from .serializer import FarmSerializer
