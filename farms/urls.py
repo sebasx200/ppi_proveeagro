@@ -7,5 +7,5 @@ from .views import FarmList, FarmDelete
 urlpatterns = [
     path('farm/list/', FarmList.as_view(), name='farm_list'),
     path('farm/delete/<int:pk>/', FarmDelete.as_view(), name='farm_delete'),
-    #path('farm/list', views.farm_list, name='farm_list'),
+    
 ]
