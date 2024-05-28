@@ -1,12 +1,15 @@
-from django.urls import path
-from . import views
+from django.urls import path, include
 
 # URL configuration for the login app
 
+from .views import CreateUserView, UserView
+from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
+
 urlpatterns = [
-    path('', views.main, name='main'),
-    path('get_suppliers/', views.get_suppliers, name='get_suppliers'),
-    path('login/', views.login_page, name='login_page'),
-    path('signup/', views.signup, name='signup'), 
-    path('logout/', views.logout_sesion, name='logout'), 
+    path('login/user/register/', CreateUserView.as_view(), name='register'),
+    path('login/token/', TokenObtainPairView.as_view(), name='get_token'),
+    path('login/token/refresh/', TokenRefreshView.as_view(), name='refresh_token'),
+    path('login-auth/', include('rest_framework.urls')),
+    path('login/user/profile/', UserView.as_view(), name='user_profile'), 
+    
 ]
