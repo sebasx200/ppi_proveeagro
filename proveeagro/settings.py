@@ -177,7 +177,7 @@ SIMPLE_JWT = {
 JAZZMIN_SETTINGS = {
     "site_title": "ProveeAgro",
     "site_header": "ProveeAgro",
-    "site_logo": "login/img/logo_proveeagro.png",
+    "site_logo": "img/logo_proveeagro.png",
     "site_brand": "ProveeAgro",
     
 }

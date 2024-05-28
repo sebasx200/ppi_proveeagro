@@ -6,10 +6,17 @@ from . import views
 
 router = routers.DefaultRouter()
 router.register(r'farms', views.FarmView, 'farms')
+router.register(r'activity_types', views.ActivityTypeView, 'activity_types')
+router.register(r'activities', views.ActivityView, 'activities')
+router.register(r'activity_details', views.ActivityDetailView, 'activity_details')
+router.register(r'farm_activities', views.FarmActivityView, 'farm_activities')
+
 
 urlpatterns = [
-    path('farm/', include(router.urls)),
-    path('farm/list', views.farm_list, name='farm_list'),
-    path('farm/detail/<int:farm_id>', views.farm_detail, name='farm_detail'),
-    path('farm/add', views.farm_add, name='farm_add'),
+    path('farm/', include(router.urls), name='farm'),
+    path('farm/activity_types/', include(router.urls)),
+    path('farm/activities/', include(router.urls)),
+    path('farm/activity_details/', include(router.urls)),
+    path('farm/farm_activities/', include(router.urls)),
+    
 ]
