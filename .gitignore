@@ -1,7 +1,5 @@
 # files to ignore in the app
 
-client
-
 *.pyc
 __pycache__/
 
