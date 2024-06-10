@@ -14,6 +14,12 @@ class FarmView(viewsets.ModelViewSet):
         user = self.request.user
         return Farm.objects.filter(user=user.id)
     
+    def perform_create(self, serializer):
+        if serializer.is_valid():
+            serializer.save(user=self.request.user)
+        else:
+            print(serializer.errors)
+    
 class ActivityTypeView(viewsets.ReadOnlyModelViewSet):
     serializer_class = ActivityTypeSerializer
     permission_classes = [IsAuthenticated]
