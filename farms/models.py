@@ -1,5 +1,5 @@
 from django.db import models
-from suppliers.models import Location
+from suppliers.models import Supplier, Location
 
 # Create your models here.
 
@@ -80,3 +80,19 @@ class FarmActivity(models.Model):
 
     def __str__(self):
         return f"{self.farm} - {self.activity}" 
+    
+class FarmSupplier(models.Model):
+    """
+    this class is used to create a new table for farm suppliers in the database with the following fields
+    """
+    farm = models.ForeignKey(Farm, on_delete=models.CASCADE, verbose_name='Finca')
+    supplier = models.ForeignKey(Supplier, on_delete=models.CASCADE, verbose_name='Proveedor')
+
+    class Meta:
+        verbose_name = 'Proveedor de la finca'
+        verbose_name_plural = 'Proveedores de la finca'
+        unique_together = ('farm', 'supplier')
+        ordering = ['farm']
+
+    def __str__(self):
+        return f"{self.farm} - {self.supplier}" 
