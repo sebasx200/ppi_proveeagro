@@ -1,8 +1,8 @@
 # This file is used to create the views for the farms app
-from .models import Farm, ActivityType, Activity, ActivityDetail, FarmActivity
+from .models import Farm, ActivityType, Activity, ActivityDetail, FarmActivity, FarmSupplier
 from rest_framework import viewsets
 from rest_framework.permissions import IsAuthenticated, AllowAny
-from .serializer import FarmSerializer, ActivityTypeSerializer, ActivitySerializer, ActivityDetailSerializer, FarmActivitySerializer
+from .serializer import FarmSerializer, ActivityTypeSerializer, ActivitySerializer, ActivityDetailSerializer, FarmActivitySerializer, FarmSupplierSerializer
 
 # Create your views here.
 
@@ -39,3 +39,11 @@ class FarmActivityView(viewsets.ReadOnlyModelViewSet):
     serializer_class = FarmActivitySerializer
     permission_classes = [IsAuthenticated]
     queryset = FarmActivity.objects.all()
+
+class FarmSupplierView(viewsets.ModelViewSet):
+    serializer_class = FarmSupplierSerializer
+    permission_classes = [AllowAny]
+    
+    def get_queryset(self):
+        user = self.request.user
+        return FarmSupplier.objects.filter(farm__user=user.id)

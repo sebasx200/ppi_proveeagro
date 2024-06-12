@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Farm, ActivityType, Activity, ActivityDetail, FarmActivity
+from .models import Farm, ActivityType, Activity, ActivityDetail, FarmActivity, FarmSupplier
 from suppliers.models import Location
 from suppliers.serializer import LocationSerializer
 
@@ -48,3 +48,8 @@ class FarmSerializer(serializers.ModelSerializer):
         instance.save()
         location.save()
         return instance
+    
+class FarmSupplierSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = FarmSupplier
+        fields = ['id','farm','supplier']
