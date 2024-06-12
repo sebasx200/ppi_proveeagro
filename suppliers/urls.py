@@ -15,6 +15,5 @@ urlpatterns = [
     path('location/city/', include(router.urls)),
     path('location/department/', include(router.urls)),
     path('supplier/', include(router.urls)),
-    path('suppliers/', views.suppliers_list, name='suppliers_list'),
-    path('suppliers/add/', views.supplier_add, name='supplier_add'),
+
 ]
