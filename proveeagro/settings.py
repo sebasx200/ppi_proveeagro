@@ -41,9 +41,10 @@ INSTALLED_APPS = [
     'dashboard',
     'suppliers',
     'farms',
+    "admin_interface",
+    "colorfield",
     'rest_framework',
     'corsheaders',
-    'jazzmin',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -52,6 +53,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 ]
 X_FRAME_OPTIONS = 'SAMEORIGIN'
+SILENCED_SYSTEM_CHECKS = ["security.W019"]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -172,13 +174,3 @@ SIMPLE_JWT = {
     "ACCESS_TOKEN_LIFETIME": timedelta(minutes=30),
     "REFRESH_TOKEN_LIFETIME": timedelta(days=1),
 }
-
-# Jazzmin settings
-JAZZMIN_SETTINGS = {
-    "site_title": "ProveeAgro",
-    "site_header": "ProveeAgro",
-    "site_logo": "img/logo_proveeagro.png",
-    "site_brand": "ProveeAgro",
-    
-}
-JAZZMIN_SETTINGS["show_ui_builder"] = True
