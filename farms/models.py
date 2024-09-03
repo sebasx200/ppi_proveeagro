@@ -1,5 +1,6 @@
 from django.db import models
-from suppliers.models import Supplier, Location
+from locations.models import Location
+from suppliers.models import Supplier
 
 # Create your models here.
 

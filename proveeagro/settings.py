@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'dashboard',
     'suppliers',
     'farms',
+    'locations',
     "admin_interface",
     "colorfield",
     'rest_framework',
@@ -95,7 +96,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'proveeagro_db',
         'USER': 'postgres',
-        'PASSWORD': 'password',
+        'PASSWORD': 'pgpsswd',
         'HOST': 'localhost',
         'PORT': '5432',
     }
