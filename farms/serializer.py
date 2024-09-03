@@ -1,6 +1,6 @@
 from rest_framework import serializers
+from locations.models import Location
 from .models import Farm, ActivityType, Activity, ActivityDetail, FarmActivity, FarmSupplier
-from suppliers.models import Location
 from suppliers.serializer import LocationSerializer
 
 class ActivityTypeSerializer(serializers.ModelSerializer):

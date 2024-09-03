@@ -13,7 +13,8 @@ sys.path.append(os.getcwd())
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'proveeagro.settings')
 django.setup()
 
-from suppliers.models import Supplier, Location
+from locations.models import Location
+from suppliers.models import Supplier
 
 # Load the data from the excel file
 df = pd.read_excel('proveeagro/data/suppliers_medellin.xlsx')
