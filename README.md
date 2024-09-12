@@ -1,4 +1,6 @@
-Proveeagro is a web page that allows farm owners to search and find in a better and easier way the best suppliers for their farms.
+# ProveeAgro Back-end
+
+## Proveeagro is a web page that allows farm owners to search and find in a better and easier way the best suppliers for their farms.
 
 This application works using Python with Django framework for its web apartment.
 
@@ -9,16 +11,16 @@ All you have to do is run an easy pip installation using the file.
 
 The dependencies neeeded are:
 
-asgiref
-Django
-django-cors-headers
-djangorestframework
-djangorestframework-simplejwt
-PyJWT
-pytz
-sqlparse
-psycopg2-binary
-python-dotenv
+- asgiref
+- Django
+- django-cors-headers
+- djangorestframework
+- djangorestframework-simplejwt
+- PyJWT
+- pytz
+- sqlparse
+- psycopg2-binary
+- python-dotenv
 
 ```
 pip install -r requirements.txt
