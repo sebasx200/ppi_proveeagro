@@ -8,15 +8,15 @@ class Farm(models.Model):
     """
     this class is used to create a new table for farms in the database with the following fields
     """
-    name = models.CharField(max_length=255, verbose_name='Nombre de la finca')
+    name = models.CharField(max_length=255, verbose_name='Nombre de la granja')
     created_at = models.DateTimeField(auto_now_add=True, verbose_name='Creado en')
     updated_at = models.DateTimeField(auto_now=True, verbose_name='Actualizado en')
     user = models.ForeignKey('auth.User', on_delete=models.CASCADE, verbose_name='Usuario')
     location = models.ForeignKey(Location, on_delete=models.CASCADE, verbose_name='Ubicación')
 
     class Meta:
-        verbose_name = 'Finca'
-        verbose_name_plural = 'Fincas'
+        verbose_name = 'Granja'
+        verbose_name_plural = 'Granjas'
         ordering = ['name']
 
     def __str__(self):
@@ -70,12 +70,12 @@ class FarmActivity(models.Model):
     """
     this class is used to create a new table for farm activities in the database with the following fields
     """
-    farm = models.ForeignKey(Farm, on_delete=models.CASCADE, verbose_name='Finca')
+    farm = models.ForeignKey(Farm, on_delete=models.CASCADE, verbose_name='Granja')
     activity = models.ForeignKey(Activity, on_delete=models.CASCADE, verbose_name='Actividad')
 
     class Meta:
-        verbose_name = 'Actividad de la finca'
-        verbose_name_plural = 'Actividades de la finca'
+        verbose_name = 'Actividad de la granja'
+        verbose_name_plural = 'Actividades de la granja'
         unique_together = ('farm', 'activity')
         ordering = ['farm']
 
@@ -86,12 +86,12 @@ class FarmSupplier(models.Model):
     """
     this class is used to create a new table for farm suppliers in the database with the following fields
     """
-    farm = models.ForeignKey(Farm, on_delete=models.CASCADE, verbose_name='Finca')
+    farm = models.ForeignKey(Farm, on_delete=models.CASCADE, verbose_name='Granja')
     supplier = models.ForeignKey(Supplier, on_delete=models.CASCADE, verbose_name='Proveedor')
 
     class Meta:
-        verbose_name = 'Proveedor de la finca'
-        verbose_name_plural = 'Proveedores de la finca'
+        verbose_name = 'Proveedor de la granja'
+        verbose_name_plural = 'Proveedores de la granja'
         unique_together = ('farm', 'supplier')
         ordering = ['farm']
 
