@@ -7,8 +7,6 @@ from .models import (
     FarmActivity,
     FarmSupplier,
 )
-from rest_framework import viewsets
-from rest_framework.permissions import IsAuthenticated, AllowAny
 from .serializer import (
     FarmSerializer,
     ActivityTypeSerializer,
@@ -16,7 +14,10 @@ from .serializer import (
     ActivityDetailSerializer,
     FarmActivitySerializer,
     FarmSupplierSerializer,
+    FarmSupplierPostSerializer,
 )
+from rest_framework import viewsets
+from rest_framework.permissions import IsAuthenticated, AllowAny
 
 # Create your views here.
 
@@ -61,9 +62,11 @@ class FarmActivityView(viewsets.ReadOnlyModelViewSet):
 
 
 class FarmSupplierView(viewsets.ModelViewSet):
-    serializer_class = FarmSupplierSerializer
-    permission_classes = [AllowAny]
+    permission_classes = [IsAuthenticated]
+    queryset = Farm.objects.all()
 
-    def get_queryset(self):
-        user = self.request.user
-        return FarmSupplier.objects.filter(farm__user=user.id)
+    def get_serializer_class(self):
+        if self.request.method == "POST":
+            self.queryset = FarmSupplier.objects.all()
+            return FarmSupplierPostSerializer
+        return FarmSupplierSerializer
