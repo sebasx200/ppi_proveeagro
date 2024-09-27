@@ -61,6 +61,8 @@ class FarmSerializer(serializers.ModelSerializer):
         instance.name = validated_data.get("name", instance.name)
         instance.user = validated_data.get("user", instance.user)
         location.address = location_data.get("address", location.address)
+        location.latitude = location_data.get("latitude", location.latitude)
+        location.longitude = location_data.get("longitude", location.longitude)
         location.city = location_data.get("city", location.city)
         instance.save()
         location.save()

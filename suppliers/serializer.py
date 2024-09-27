@@ -24,6 +24,8 @@ class SupplierSerializer(serializers.ModelSerializer):
         instance.email = validated_data.get('email', instance.email)
         instance.phone = validated_data.get('phone', instance.phone)
         location.address = location_data.get('address', location.address)
+        location.latitude = location_data.get("latitude", location.latitude)
+        location.longitude = location_data.get("longitude", location.longitude)
         location.city = location_data.get('city', location.city)
         instance.save()
         location.save()
