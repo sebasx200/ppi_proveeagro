@@ -11,7 +11,7 @@ class Farm(models.Model):
     name = models.CharField(max_length=255, verbose_name='Nombre de la granja')
     created_at = models.DateTimeField(auto_now_add=True, verbose_name='Creado en')
     updated_at = models.DateTimeField(auto_now=True, verbose_name='Actualizado en')
-    user = models.ForeignKey('auth.User', on_delete=models.CASCADE, verbose_name='Usuario')
+    created_by = models.ForeignKey('auth.User', on_delete=models.CASCADE, verbose_name='Usuario')
     location = models.ForeignKey(Location, on_delete=models.CASCADE, verbose_name='Ubicación')
 
     class Meta:
