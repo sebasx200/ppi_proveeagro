@@ -28,11 +28,11 @@ class FarmView(viewsets.ModelViewSet):
 
     def get_queryset(self):
         user = self.request.user
-        return Farm.objects.filter(user=user.id)
+        return Farm.objects.filter(created_by=user.id)
 
     def perform_create(self, serializer):
         if serializer.is_valid():
-            serializer.save(user=self.request.user)
+            serializer.save(created_by=self.request.user)
         else:
             print(serializer.errors)
 
@@ -63,7 +63,9 @@ class FarmActivityView(viewsets.ReadOnlyModelViewSet):
 
 class FarmSupplierView(viewsets.ModelViewSet):
     permission_classes = [IsAuthenticated]
-    queryset = Farm.objects.all()
+    def get_queryset(self):
+        user = self.request.user
+        return Farm.objects.filter(created_by=user.id)
 
     def get_serializer_class(self):
         if self.request.method == "POST":

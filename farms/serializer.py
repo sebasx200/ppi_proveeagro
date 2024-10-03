@@ -46,8 +46,8 @@ class FarmSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Farm
-        fields = ["id", "name", "location"]
-        extra_kwargs = {"user": {"read_only": True}}
+        fields = ["id", "name", "created_by", "location"]
+        extra_kwargs = {"created_by": {"read_only": True}}
 
     def create(self, validated_data):
         location_data = validated_data.pop("location")
@@ -59,7 +59,6 @@ class FarmSerializer(serializers.ModelSerializer):
         location_data = validated_data.pop("location")
         location = instance.location
         instance.name = validated_data.get("name", instance.name)
-        instance.user = validated_data.get("user", instance.user)
         location.address = location_data.get("address", location.address)
         location.latitude = location_data.get("latitude", location.latitude)
         location.longitude = location_data.get("longitude", location.longitude)
