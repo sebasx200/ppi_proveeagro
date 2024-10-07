@@ -13,8 +13,8 @@ class UserSerializer(serializers.ModelSerializer):
     email = serializers.EmailField()
     first_name = serializers.CharField()
     last_name = serializers.CharField()
-    is_superuser = serializers.BooleanField()
-
+    is_superuser = serializers.BooleanField(required=False)
+    
     class Meta:
         model = User
         fields = [
