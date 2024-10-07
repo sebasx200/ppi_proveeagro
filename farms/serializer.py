@@ -84,7 +84,7 @@ class FarmSupplierSerializer(serializers.ModelSerializer):
         ]
 
     def get_suppliers(self, obj):
-        # Filtrar los proveedores por la granja actual
+        # Filtrer the suppliers by current farm
         suppliers = Supplier.objects.filter(farmsupplier__farm=obj)
         return SupplierSerializer(suppliers, many=True).data
 
