@@ -2,11 +2,13 @@ from rest_framework import serializers
 from locations.models import Location
 from locations.serializer import LocationSerializer
 from .models import Supplier
+from farms.models import AgendaCount
 
 
 class SupplierSerializer(serializers.ModelSerializer):
     location = LocationSerializer()
     is_added_by_superuser = serializers.SerializerMethodField()
+    agenda_count = serializers.SerializerMethodField()
 
     class Meta:
         model = Supplier
@@ -20,11 +22,18 @@ class SupplierSerializer(serializers.ModelSerializer):
             "created_at",
             "updated_at",
             "location",
+            "agenda_count"
         ]
         extra_kwargs = {"created_by": {"read_only": True}}
 
     def get_is_added_by_superuser(self, obj):
         return obj.created_by.is_superuser
+
+    def get_agenda_count(self, obj):
+        agenda_count = AgendaCount.objects.filter(supplier=obj).first()
+        if agenda_count:
+            return agenda_count.agenda_count
+        return 0
 
     def create(self, validated_data):
         request = self.context.get("request")

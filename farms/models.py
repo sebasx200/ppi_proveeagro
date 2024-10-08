@@ -21,7 +21,7 @@ class Farm(models.Model):
 
     def __str__(self):
         return self.name
-    
+
 class ActivityType(models.Model):
     """
     this class is used to create a new table for activity types in the database with the following fields
@@ -35,7 +35,7 @@ class ActivityType(models.Model):
 
     def __str__(self):
         return self.name_type
-    
+
 class Activity(models.Model):
     """
     this class is used to create a new table for activities in the database with the following fields
@@ -50,7 +50,7 @@ class Activity(models.Model):
 
     def __str__(self):
         return self.name_activity
-    
+
 class ActivityDetail(models.Model):
     """
     this class is used to create a new table for activity details in the database with the following fields
@@ -65,7 +65,7 @@ class ActivityDetail(models.Model):
 
     def __str__(self):
         return self.activity_description
-    
+
 class FarmActivity(models.Model):
     """
     this class is used to create a new table for farm activities in the database with the following fields
@@ -81,7 +81,7 @@ class FarmActivity(models.Model):
 
     def __str__(self):
         return f"{self.farm} - {self.activity}" 
-    
+
 class FarmSupplier(models.Model):
     """
     this class is used to create a new table for farm suppliers in the database with the following fields
@@ -97,3 +97,11 @@ class FarmSupplier(models.Model):
 
     def __str__(self):
         return f"{self.farm} - {self.supplier}" 
+
+
+class AgendaCount(models.Model):
+    supplier = models.OneToOneField(Supplier, on_delete=models.CASCADE)
+    agenda_count = models.IntegerField(default=0)
+
+    def __str__(self):
+        return f"{self.supplier.name}: {self.agenda_count} citas"
