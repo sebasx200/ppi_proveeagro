@@ -80,17 +80,17 @@ class FarmSupplierView(viewsets.ModelViewSet):
         agenda_count, created = AgendaCount.objects.get_or_create(
             supplier=farm_supplier.supplier
         )
-        agenda_count.appointment_count += 1
+        agenda_count.agenda_count += 1
         agenda_count.save()
 
         return farm_supplier
 
     def perform_destroy(self, instance):
         agenda_count = AgendaCount.objects.get(supplier=instance.supplier)
-        if agenda_count.appointment_count > 0:
-            agenda_count.appointment_count -= 1
+        if agenda_count.agenda_count > 0:
+            agenda_count.agenda_count -= 1
             agenda_count.save()
         else:
-            agenda_count.appointment_count = 0
+            agenda_count.agenda_count = 0
 
         instance.delete()
