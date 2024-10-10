@@ -1,5 +1,5 @@
 from django.db import models
-
+from simple_history.models import HistoricalRecords
 
 # Create your models here.
 class Department(models.Model):
@@ -54,6 +54,7 @@ class Location(models.Model):
         related_name="location_city",
         verbose_name="Ciudad",
     )
+    history = HistoricalRecords()
 
     class Meta:
         verbose_name = "Ubicación"

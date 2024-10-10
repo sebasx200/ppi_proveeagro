@@ -1,6 +1,6 @@
 from django.contrib import admin
-
 from locations.models import City, Department, Location
+from simple_history.admin import SimpleHistoryAdmin
 
 
 # Register your models here.
@@ -30,7 +30,7 @@ class CityAdmin(admin.ModelAdmin):
     list_per_page = 10
 
 
-class LocationAdmin(admin.ModelAdmin):
+class LocationAdmin(SimpleHistoryAdmin, admin.ModelAdmin):
     list_display = [
         "address",
         "city",

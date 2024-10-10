@@ -1,6 +1,7 @@
 from django.db import models
 from locations.models import Location
 from suppliers.models import Supplier
+from simple_history.models import HistoricalRecords
 
 # Create your models here.
 
@@ -13,6 +14,8 @@ class Farm(models.Model):
     updated_at = models.DateTimeField(auto_now=True, verbose_name='Actualizado en')
     created_by = models.ForeignKey('auth.User', on_delete=models.CASCADE, verbose_name='Usuario')
     location = models.ForeignKey(Location, on_delete=models.CASCADE, verbose_name='Ubicación')
+
+    history = HistoricalRecords()
 
     class Meta:
         verbose_name = 'Granja'
