@@ -92,6 +92,8 @@ class FarmSupplier(models.Model):
     farm = models.ForeignKey(Farm, on_delete=models.CASCADE, verbose_name='Granja')
     supplier = models.ForeignKey(Supplier, on_delete=models.CASCADE, verbose_name='Proveedor')
 
+    history = HistoricalRecords()
+
     class Meta:
         verbose_name = 'Proveedor de la granja'
         verbose_name_plural = 'Proveedores de la granja'

@@ -2,22 +2,76 @@ from rest_framework import serializers
 from farms.models import Farm, FarmSupplier
 from suppliers.models import Supplier
 
-class HistoricalRecordField(serializers.ListField):
-    child = serializers.DictField()
 
-    def to_representation(self, data):
-        return super().to_representation(data.values())
-    
 class FarmHistorySerializer(serializers.ModelSerializer):
-    history = HistoricalRecordField(read_only=True)
+    """
+    this is the farm history serializer which takes the farm historical table as model
+    """
+
+    history_user = serializers.StringRelatedField()  # to show the user
+
     class Meta:
-        model = Farm
-        fields = ["id", "name", "created_by", "location", "history"]
-        extra_kwargs = {"created_by": {"read_only": True}}
+        model = Farm.history.model  # this is the historical model of the object
+        fields = [
+            "id",
+            "name",
+            "location",
+            "history_date",
+            "history_user",
+            "history_type",
+        ]
+
 
 class SupplierHistorySerializer(serializers.ModelSerializer):
-    history = HistoricalRecordField(read_only=True)
+    """
+    this is the suppplier history serializer which takes the supplier historical table as model
+    """
+
+    history_user = serializers.StringRelatedField()  # # to show the user
+
     class Meta:
-        model = Supplier
-        fields = ["id", "name", "created_by", "location", "history"]
-        extra_kwargs = {"created_by": {"read_only": True}}
+        model = Supplier.history.model  # this is the historical model of the object
+        fields = [
+            "id",
+            "name",
+            "location",
+            "history_date",
+            "history_user",
+            "history_type",
+        ]
+
+
+class FarmSupplierHistorySerializer(serializers.ModelSerializer):
+    """
+    this is the farm - supplier history serializer which takes the farm - supplier historical table as model
+    """
+
+    farm_name = serializers.SerializerMethodField()
+    supplier_name = serializers.SerializerMethodField()
+
+    class Meta:
+        model = FarmSupplier.history.model  # this is the historical model of the object
+        fields = [
+            "id",
+            "farm",
+            "farm_name",
+            "supplier",
+            "supplier_name",
+            "history_date",
+            "history_user",
+            "history_type",
+        ]
+
+    # this gets the name of the farm from the objetct
+    def get_farm_name(self, obj):
+        try:
+            return obj.farm.name
+        except Farm.DoesNotExist:
+            return None
+
+    # this gets the name of the supplier from the objetct
+    def get_supplier_name(self, obj):
+        try:
+            return obj.supplier.name
+        except Supplier.DoesNotExist:
+            return None
