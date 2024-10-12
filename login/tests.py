@@ -22,20 +22,40 @@ class UserRegistrationTestCase(TestCase):
         return self.client.post(reverse("register"), data=payload, format="json")
 
     def test_user_registration_success(self):
-        """
-        Test to verify that user registration works with valid data.
-        """
+        """Test to verify that user registration works with valid data."""
         response = self._post_register(self.valid_payload)
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
         self.assertEqual(User.objects.count(), 1)
         self.assertEqual(User.objects.get().username, "testuser")
 
     def test_user_registration_password_mismatch(self):
-        """
-        Test to verify that user registration fails when passwords do not match.
-        """
+        """Test to verify that user registration fails when passwords do not match."""
         invalid_payload = self.valid_payload.copy()
         invalid_payload["password2"] = "WrongPassword123"
+        response = self._post_register(invalid_payload)
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+        self.assertIn("password", response.data)
+
+    def test_user_registration_short_password(self):
+        """Test to verify that user registration fails with a short password."""
+        invalid_payload = self.valid_payload.copy()
+        invalid_payload["password"] = invalid_payload["password2"] = "short"
+        response = self._post_register(invalid_payload)
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+        self.assertIn("password", response.data)
+
+    def test_user_registration_numeric_password(self):
+        """Test to verify that user registration fails with a numeric-only password."""
+        invalid_payload = self.valid_payload.copy()
+        invalid_payload["password"] = invalid_payload["password2"] = "12345678"
+        response = self._post_register(invalid_payload)
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+        self.assertIn("password", response.data)
+
+    def test_user_registration_common_password(self):
+        """Test to verify that user registration fails with a common password."""
+        invalid_payload = self.valid_payload.copy()
+        invalid_payload["password"] = invalid_payload["password2"] = "password123"
         response = self._post_register(invalid_payload)
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
         self.assertIn("password", response.data)
