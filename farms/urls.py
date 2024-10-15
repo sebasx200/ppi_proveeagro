@@ -14,10 +14,5 @@ router.register(r"farm_suppliers", views.FarmSupplierView, "farm_suppliers")
 
 
 urlpatterns = [
-    path("farm/", include(router.urls), name="farm"),
-    path("farm/activity_types/", include(router.urls)),
-    path("farm/activities/", include(router.urls)),
-    path("farm/activity_details/", include(router.urls)),
-    path("farm/farm_activities/", include(router.urls)),
-    path("farm/farm_suppliers/", include(router.urls)),
+    path("farm/", include(router.urls)),
 ]
