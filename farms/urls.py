@@ -11,6 +11,7 @@ router.register(r"activities", views.ActivityView, "activities")
 router.register(r"activity_details", views.ActivityDetailView, "activity_details")
 router.register(r"farm_activities", views.FarmActivityView, "farm_activities")
 router.register(r"farm_suppliers", views.FarmSupplierView, "farm_suppliers")
+router.register(r"farm_supplier_relation", views.FarmSupplierRelationView, "farm_supplier_relation")
 
 
 urlpatterns = [

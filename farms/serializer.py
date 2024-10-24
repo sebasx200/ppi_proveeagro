@@ -8,7 +8,6 @@ from .models import (
     FarmActivity,
     FarmSupplier,
 )
-from suppliers.serializer import SupplierSerializer
 from locations.serializer import LocationSerializer
 from suppliers.models import Supplier
 
@@ -68,28 +67,47 @@ class FarmSerializer(serializers.ModelSerializer):
         return instance
 
 
+class SupplierSerializer(serializers.ModelSerializer):
+    """
+    this a custom serializer for supplier which brings the relation with the farm from the FarmSupplier model
+    """
+
+    relation_id = serializers.SerializerMethodField()
+
+    class Meta:
+        model = Supplier
+        fields = ["id", "name", "relation_id"]
+
+    def get_relation_id(self, obj):
+        # Get the farm from the context
+        farm = self.context.get("farm")
+        if farm:
+            try:
+                relation = FarmSupplier.objects.get(farm=farm, supplier=obj)
+                return relation.id
+            except FarmSupplier.DoesNotExist:
+                return None
+        return None
+
+
 class FarmSupplierSerializer(serializers.ModelSerializer):
     """
-    this is the serializer to get the farms with its related suppliers
+    this serializer releates the current farm with all the supplier it is related with
     """
 
     suppliers = serializers.SerializerMethodField()
 
     class Meta:
         model = Farm
-        fields = [
-            "id",
-            "name",
-            "suppliers",
-        ]
+        fields = ["id", "name", "suppliers"]
 
     def get_suppliers(self, obj):
-        # Filtrer the suppliers by current farm
+        # Get the supplier related with the current farm
         suppliers = Supplier.objects.filter(farmsupplier__farm=obj)
-        return SupplierSerializer(suppliers, many=True).data
+        return SupplierSerializer(suppliers, many=True, context={"farm": obj}).data
 
 
-class FarmSupplierPostSerializer(serializers.ModelSerializer):
+class FarmSupplierRelationSerializer(serializers.ModelSerializer):
     """
     this serializer relates the farms and the suppliers
     this is the serializer when post request are made
