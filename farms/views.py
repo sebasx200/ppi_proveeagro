@@ -6,7 +6,7 @@ from .models import (
     ActivityDetail,
     FarmActivity,
     FarmSupplier,
-    AgendaCount
+    AgendaCount,
 )
 from .serializer import (
     FarmSerializer,
@@ -15,15 +15,21 @@ from .serializer import (
     ActivityDetailSerializer,
     FarmActivitySerializer,
     FarmSupplierSerializer,
-    FarmSupplierPostSerializer,
+    FarmSupplierRelationSerializer,
 )
 from rest_framework import viewsets
+from rest_framework.response import Response
+from rest_framework import status
 from rest_framework.permissions import IsAuthenticated, AllowAny
 
 # Create your views here.
 
 
 class FarmView(viewsets.ModelViewSet):
+    """
+    this view handles all the Farm model CRUD
+    """
+
     serializer_class = FarmSerializer
     permission_classes = [IsAuthenticated]
 
@@ -63,15 +69,17 @@ class FarmActivityView(viewsets.ReadOnlyModelViewSet):
 
 
 class FarmSupplierView(viewsets.ModelViewSet):
+    """
+    this is the view that shows the current farm with all its suppliers
+    """
+
     permission_classes = [IsAuthenticated]
+
     def get_queryset(self):
         user = self.request.user
         return Farm.objects.filter(created_by=user.id)
 
     def get_serializer_class(self):
-        if self.request.method == "POST":
-            self.queryset = FarmSupplier.objects.all()
-            return FarmSupplierPostSerializer
         return FarmSupplierSerializer
 
     def perform_create(self, serializer):
@@ -94,3 +102,28 @@ class FarmSupplierView(viewsets.ModelViewSet):
             agenda_count.agenda_count = 0
 
         instance.delete()
+
+
+class FarmSupplierRelationView(viewsets.ModelViewSet):
+    """
+    this is the view for delete and post request for the FarmSupplier model
+    """
+
+    serializer_class = FarmSupplierRelationSerializer
+    permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+        user = self.request.user
+        return FarmSupplier.objects.filter(farm__created_by=user)
+    
+    def create(self, request, *args, **kwargs):
+        farm_id = request.data.get('farm')
+        supplier_id = request.data.get('supplier')
+
+        if FarmSupplier.objects.filter(farm_id=farm_id, supplier_id=supplier_id).exists():
+            return Response(
+                {"detail": "Este proveedor ya fue agendado a la granja"},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+
+        return super().create(request, *args, **kwargs)
