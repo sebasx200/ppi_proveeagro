@@ -16,7 +16,4 @@ router.register(
 
 urlpatterns = [
     path("location/", include(router.urls)),
-    path("location/city/", include(router.urls)),
-    path("location/department/", include(router.urls)),
-    path("location/farms_suppliers_locations/", include(router.urls)),
 ]
