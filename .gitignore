@@ -6,6 +6,11 @@ node_modules/
 *.pyc
 __pycache__/
 
+/static/
+
+proveeagro/scripts/
+proveeagro/data/
+
 *.sqlite3
 *.pyc
 *.pyo
