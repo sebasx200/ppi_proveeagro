@@ -6,8 +6,6 @@ from .models import (
     ActivityDetail,
     FarmActivity,
     FarmSupplier,
-    Category,
-    Supply,
 )
 from simple_history.admin import SimpleHistoryAdmin
 
@@ -19,5 +17,3 @@ admin.site.register(Activity)
 admin.site.register(ActivityDetail)
 admin.site.register(FarmActivity)
 admin.site.register(FarmSupplier)
-admin.site.register(Category)
-admin.site.register(Supply)

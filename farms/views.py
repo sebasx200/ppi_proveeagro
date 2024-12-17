@@ -115,15 +115,17 @@ class FarmSupplierRelationView(viewsets.ModelViewSet):
     def get_queryset(self):
         user = self.request.user
         return FarmSupplier.objects.filter(farm__created_by=user)
-    
-    def create(self, request, *args, **kwargs):
-        farm_id = request.data.get('farm')
-        supplier_id = request.data.get('supplier')
 
-        if FarmSupplier.objects.filter(farm_id=farm_id, supplier_id=supplier_id).exists():
+    def create(self, request, *args, **kwargs):
+        farm_id = request.data.get("farm")
+        supplier_id = request.data.get("supplier")
+
+        if FarmSupplier.objects.filter(
+            farm_id=farm_id, supplier_id=supplier_id
+        ).exists():
             return Response(
                 {"detail": "Este proveedor ya fue agendado a la granja"},
-                status=status.HTTP_400_BAD_REQUEST
+                status=status.HTTP_400_BAD_REQUEST,
             )
 
         return super().create(request, *args, **kwargs)

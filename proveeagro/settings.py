@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     "suppliers",
     "farms",
     "locations",
+    "inventory",
     "admin_interface",
     "colorfield",
     "rest_framework",

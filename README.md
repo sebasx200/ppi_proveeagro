@@ -1,4 +1,4 @@
-# ProveeAgro Back End Setup Guide
+# ProveeAgro Backend Setup Guide
 
 ## Prerequisites
 

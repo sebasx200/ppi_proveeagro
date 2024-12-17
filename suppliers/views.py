@@ -21,17 +21,18 @@ class SupplierView(viewsets.ModelViewSet):
         suppliers_by_superusers = Supplier.objects.filter(created_by__is_superuser=True)
 
         if not isinstance(self.request.user, AnonymousUser):
-
             # Suppliers created by the current user
             suppliers_by_current_user = Supplier.objects.filter(
                 created_by=self.request.user
             )
 
+            # both querysets combined
             queryset = suppliers_by_superusers | suppliers_by_current_user
+        else:
+            queryset = suppliers_by_superusers
 
-            return queryset.distinct()
-
-        return suppliers_by_superusers.distinct()
+        # prefetch_related to include related Supplies
+        return queryset.prefetch_related("supplies").distinct()
 
     def perform_create(self, serializer):
         serializer.save(created_by=self.request.user)
