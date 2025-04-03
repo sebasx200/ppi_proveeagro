@@ -67,6 +67,16 @@ class FarmSerializer(serializers.ModelSerializer):
         return instance
 
 
+class SimpleFarmSerializer(serializers.ModelSerializer):
+    """
+    this serializer works when a simple farm data is needed without all the relation fields
+    """
+
+    class Meta:
+        model = Farm
+        fields = ["id", "name", "created_by"]
+
+
 class SupplierSerializer(serializers.ModelSerializer):
     """
     this a custom serializer for supplier which brings the relation with the farm from the FarmSupplier model
