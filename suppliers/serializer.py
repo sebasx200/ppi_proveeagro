@@ -9,6 +9,7 @@ class SupplierSerializer(serializers.ModelSerializer):
     location = LocationSerializer()
     is_added_by_superuser = serializers.SerializerMethodField()
     agenda_count = serializers.SerializerMethodField()
+    supplies = serializers.SerializerMethodField()
 
     class Meta:
         model = Supplier
@@ -22,7 +23,8 @@ class SupplierSerializer(serializers.ModelSerializer):
             "created_at",
             "updated_at",
             "location",
-            "agenda_count"
+            "supplies",
+            "agenda_count",
         ]
         extra_kwargs = {"created_by": {"read_only": True}}
 
@@ -55,3 +57,19 @@ class SupplierSerializer(serializers.ModelSerializer):
         instance.save()
         location.save()
         return instance
+    
+    def get_supplies(self, obj):
+        # Importación local para evitar el error circular
+        from inventory.serializer import SupplySerializer
+        supplies = obj.supplies.all()
+        return SupplySerializer(supplies, many=True).data
+
+
+class SimpleSupplierSerializer(serializers.ModelSerializer):
+    """
+    this serializer works when a simple supplier data is needed without all the relation fields
+    """
+
+    class Meta:
+        model = Supplier
+        fields = ["id", "name"]
